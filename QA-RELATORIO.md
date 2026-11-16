@@ -1,36 +1,35 @@
-# QA — No Network Cause 2.0
+# QA — No Network Cause 2.1
 Data: 16/11/2026
 
-## Escopo implementado
-1. Análise avançada sobre as últimas 30 verificações: taxa amostral de resposta, latência média/máxima e índice indicativo de estabilidade.
-2. Destino adicional HTTP/HTTPS configurável localmente.
-3. Alertas opcionais do navegador para interrupção e recuperação observadas durante monitoramento.
-4. Relatório de análise imprimível/salvável em PDF pelo navegador.
-5. Exportação TSV separada por tabulação como alternativa a CSV.
-6. Cache PWA atualizado para `no-network-cause-v200`.
-7. Mantida a estrutura Supabase anterior; nenhuma migração SQL é necessária nesta versão.
+## Alterações implementadas no repositório
+- Motor de recomendações por nove sintomas: cobertura Wi-Fi, congestionamento, latência, perda de pacotes, interrupções, baixa velocidade, backhaul, interferência e capacidade de antena/setor.
+- Perfis de contexto: usuário residencial, empresa/rede corporativa e operadora/provedor.
+- Coleta manual opcional de dados de ativo/setor, tecnologia, usuários simultâneos, utilização de pico, RSSI e observação de backhaul.
+- Cada plano contém hipótese não confirmada, prioridade, nível indicativo de confiança, verificações necessárias, intervenções e cautelas.
+- Exportação do plano técnico em JSON e impressão.
+- Atualização de navegação, título, documentação e cache do Service Worker para 2.1.
+- Corrigido o handler de transição de interrupção/recuperação para função assíncrona, compatível com o uso de await.
 
-## Verificações estáticas realizadas
-- Os elementos da nova navegação e seção de análise foram adicionados ao HTML.
-- Os identificadores dos controles de destino personalizado, alertas, impressão e TSV foram conectados ao JavaScript.
-- Os cálculos da análise usam apenas eventos locais do tipo diagnóstico e verificação de monitoramento.
-- O destino adicional é validado como URL HTTP/HTTPS antes de ser salvo.
-- Notificações exigem permissão explícita do navegador.
-- A folha de impressão limita a saída à seção de análise.
-- O Service Worker foi versionado para invalidar o cache anterior.
+## Limites e salvaguardas
+- O módulo de recomendações é local e baseado em regras; não é IA treinada, nem diagnóstico de causa-raiz confirmado.
+- Dados de antena/setor são inseridos manualmente. O sistema não associa automaticamente o dispositivo a uma antena.
+- Não há integração ativa com SNMP, TR-069/USP, controladores Wi-Fi, rádios, OSS/BSS ou NMS nesta entrega.
+- Nenhuma alteração de potência, canal, largura, inclinação, roteamento ou configuração é enviada aos equipamentos.
+- Recomendações de capacidade e RF exigem telemetria, estudo de cobertura/interferência, compatibilidade do fabricante e validação por profissional habilitado.
+- Custos e ROI não são estimados porque ainda não há inventário, preços ou medições suficientes.
 
-## Testes ainda necessários em ambiente real
-- Executar `node --check app.js` e `node --check sw.js` após baixar o commit.
-- Testar destino personalizado com endpoint próprio que permita requisições de navegador e com host indisponível.
-- Testar permissões de notificação e notificações em Android/Windows.
-- Imprimir/salvar PDF em Chrome Android e desktop.
-- Abrir TSV e CSV em Google Sheets Android, Excel e LibreOffice.
-- Repetir login Google, logout, renovação de sessão, sincronização e exclusão com duas contas diferentes.
-- Testar PWA instalada e atualização do Service Worker em HTTPS.
-- Testar comportamento do monitoramento com tela bloqueada; o navegador pode suspender a página.
+## Verificações realizadas nesta etapa
+- Conferência estática da presença da nova seção, controles, carregamento do novo script e inclusão no cache do Service Worker.
+- Conferência estática de que o tratamento de transição de incidentes foi alterado para async.
+- A revisão estática não equivale a execução de testes funcionais.
 
-## Interpretação e limites
-O índice de estabilidade é um indicador heurístico da amostra recente, não um padrão técnico certificado. A taxa de respostas é a proporção de verificações que alcançaram pelo menos um serviço consultado, não disponibilidade contínua da conexão. Latência é tempo aproximado de tentativa HTTP, não ping ICMP. Destinos personalizados podem falhar por CORS, DNS, firewall ou indisponibilidade do serviço; uma falha não identifica sozinha a causa física.
+## Testes pendentes
+- Executar `node --check app.js` e `node --check recommendations.js`.
+- Testar os nove cenários em Chrome Android e desktop.
+- Validar impressão, exportação JSON, navegação e atualização do Service Worker em HTTPS.
+- Realizar testes de regressão do diagnóstico, monitoramento, notificações, histórico, login Google/e-mail e sincronização Supabase.
+- Validar a experiência em telas pequenas e com leitor de tela.
+- Homologar recomendações com profissional de redes/rádio e dados reais de infraestrutura antes de uso operacional.
 
 ## Resultado
-**Implementação v2.0 enviada ao repositório. QA automatizado em navegador e homologação física ainda pendentes.** Não classificar o produto como integralmente homologado ou pronto para venda sem concluir os testes reais acima.
+**Versão 2.1 implementada no branch main.** A integração com equipamentos de provedores e a homologação funcional em navegadores permanecem pendentes. Não classificar como homologada para operação de rede até concluir os testes e validações acima.
