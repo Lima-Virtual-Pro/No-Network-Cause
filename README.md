@@ -1,35 +1,38 @@
-# No Network Cause 2.3
+# No Network Cause 2.4
 Copyright © Nailson Lima.
 
-## Melhorias da versão 2.3
-- Importação JSON/CSV com validação integral antes de alterar os dados locais.
-- Falha em qualquer linha cancela a importação inteira; não deixa registros parciais.
-- Normalização de cabeçalhos: espaços, acentos e maiúsculas/minúsculas; aliases em português e inglês.
-- Verificação de aspas e cabeçalhos CSV duplicados/vazios.
-- Limite de arquivo de 5 MB e de 10.000 registros por importação.
-- Proteção para preservar os dados em memória quando o armazenamento local falha ao salvar.
-- Cache PWA atualizado para no-network-cause-v230.
+## Melhorias da versão 2.4
+- Painel automático de informações de rede disponibilizadas pelo navegador.
+- Atualização da leitura quando o dispositivo muda entre online/offline, quando a API de rede notifica alteração e quando a página volta ao primeiro plano.
+- Exibição de tipo/perfil de conexão, downlink estimado, RTT estimado, economia de dados e plataforma, somente quando suportados.
+- Atualização manual da leitura disponível.
+- Cache PWA atualizado para no-network-cause-v240.
+
+## Identificação de antenas: limite técnico
+- Navegadores comuns não oferecem API para listar antenas celulares, torres, células, BSSID ou redes Wi-Fi próximas.
+- A geolocalização identifica a posição aproximada do dispositivo, não a antena que o atende.
+- A API Network Information, quando existe, pode expor apenas tipo/perfil de rede e estimativas; não identifica torre, setor ou ponto de acesso.
+- Por isso, esta versão não inventa nomes ou IDs de antenas e não apresenta uma identificação estimada como se fosse real.
+- Identificação confiável de célula/antena requer aplicativo nativo com permissões apropriadas e compatibilidade por sistema, ou integração autorizada com equipamento/API/operadora e fonte de inventário. Isso não está disponível no navegador atual.
 
 ## Recursos mantidos
-- Diagnóstico e monitoramento HTTP, histórico local, localização opcional, análise avançada e exportações.
-- Motor de recomendações para nove classes de sintomas, com hipóteses, evidências e cautelas.
-- Central local do provedor: telemetria manual/importada, resumo de setores, chamados e comparação antes/depois.
+- Diagnóstico HTTP, monitoramento periódico iniciado pelo usuário, histórico local, localização opcional e relatórios.
+- Motor de recomendações técnicas com hipóteses e cautelas.
+- Central local do provedor com telemetria manual/importada, chamados e comparação antes/depois.
+- Importação com validação integral, limite de 5 MB e 10.000 registros.
 
 ## Limitações reais
-- A central do provedor armazena dados no navegador atual (localStorage); não sincroniza esses dados com Supabase nem com outros dispositivos.
-- A importação é por arquivo exportado; não é integração automática com NMS/controladores.
-- CSV deve usar separador vírgula e cabeçalho na primeira linha. Arquivos separados por ponto e vírgula não são suportados nesta versão.
-- O limite de 85% é indicativo, não confirma congestionamento.
-- Comparação antes/depois é descritiva e não prova causalidade.
-- O navegador não fornece acesso universal a RSSI, BSSID, gateway, ICMP ou configuração de rádio.
-- SNMP, TR-069/USP, APIs de fabricantes, OSS/BSS e NMS não foram implementados.
-- Não há multiempresa, RBAC ou auditoria centralizada.
-- Nenhuma configuração de antena, rádio ou roteador é alterada.
+- A Central do Provedor continua armazenada localmente no navegador e não sincroniza com Supabase.
+- A leitura de rede depende das APIs expostas pelo navegador e pode apresentar campos indisponíveis.
+- Downlink/RTT da API são estimativas do navegador; não equivalem a teste de velocidade ou ping.
+- CSV usa separador vírgula.
+- Não há integração SNMP, TR-069/USP, NMS, OSS/BSS, descoberta de antenas ou alteração de equipamentos.
+- Nenhuma configuração de rádio, antena ou roteador é alterada.
 
 ## Publicação
-Hospedar em HTTPS. O cache PWA foi atualizado para v230; após publicar, recarregue/atualize a instalação da PWA.
+Hospedar em HTTPS. Cache PWA atualizado para v240; após publicar, recarregue/atualize a instalação da PWA.
 
 ## QA
-Consultar QA-RELATORIO.md. As verificações estáticas não substituem testes funcionais em navegadores e com arquivos reais.
+Consultar QA-RELATORIO.md. Revisão estática não substitui testes funcionais em navegadores e dispositivos reais.
 
 Contato: onsite.limavirtual@gmail.com.
