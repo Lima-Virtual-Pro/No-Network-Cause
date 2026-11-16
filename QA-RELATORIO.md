@@ -1,32 +1,33 @@
-# QA — No Network Cause 2.2
+# QA — No Network Cause 2.3
 Data: 16/11/2026
 
-## Escopo implementado
-- Central técnica local para provedores.
-- Cadastro manual e importação JSON/CSV de telemetria por setor.
-- Métricas: utilização, usuários, throughput, latência e perda.
-- Resumo de setores e sinalização indicativa de utilização >= 85%.
-- Chamados técnicos locais com prioridade, responsável, descrição e status.
-- Comparação antes/depois e exportação JSON.
-- Atualização de navegação, manifesto, documentação e cache PWA.
+## Escopo da versão
+- Robustez da importação JSON/CSV: validação completa antes da gravação.
+- Cancelamento integral em caso de linha inválida.
+- Normalização de cabeçalhos, suporte a aliases PT/EN, BOM UTF-8 e aspas CSV.
+- Limites de 5 MB e 10.000 registros.
+- Proteção contra perda de dados em falha de persistência local.
+- Cache PWA atualizado para v230; documentação e identificação visual 2.3.
 
-## Limitações
-- Dados da central ficam no localStorage do navegador e não sincronizam com Supabase.
-- Sem integração direta com SNMP, TR-069/USP, NMS, OSS/BSS ou controladores.
-- Importação requer arquivo exportado e mapeamento compatível.
-- O limiar de 85% não confirma congestionamento.
-- Comparação é descritiva e não demonstra causalidade.
-- Sem autenticação multiempresa, RBAC, trilha de auditoria ou sincronização multiusuário.
-- Nenhuma configuração de rádio ou antena é aplicada.
+## Limitações conhecidas
+- Telemetria e chamados da central continuam locais no navegador.
+- Não há sincronização da central com Supabase nem compartilhamento entre usuários/dispositivos.
+- Não há integração direta com SNMP, TR-069/USP, NMS, OSS/BSS ou controladores.
+- CSV usa separador vírgula; delimitador ponto e vírgula não é suportado.
+- O limiar de 85% é indicativo; comparação antes/depois não prova causalidade.
+- Não são aplicadas configurações de rádio, antena ou roteador.
+
+## Verificações realizadas nesta entrega
+- Revisão estática das alterações e confirmação dos pontos de integração por leitura dos arquivos do repositório.
+- Não foi executado navegador real, node --check, teste em Android/Windows, teste de PWA instalada ou ensaio com exportações reais de fabricantes.
 
 ## Testes funcionais pendentes
-- Executar node --check app.js, node --check recommendations.js e node --check operations.js.
-- Testar importação JSON/CSV válidos e inválidos.
-- Testar cadastro e atualização de chamados.
-- Conferir cálculos antes/depois com valores conhecidos e campos vazios.
-- Testar persistência, exportação e exclusão local.
-- Testar Android, Windows, Chrome e PWA instalada.
-- Homologar formatos de exportação de NMS/controladores reais.
+- Importar JSON e CSV válidos com cabeçalhos em português e inglês.
+- Confirmar cancelamento integral com registro inválido no início, meio e fim.
+- Testar BOM UTF-8, aspas CSV e cabeçalhos duplicados/vazios.
+- Simular quota cheia/erro de localStorage e confirmar preservação dos dados anteriores.
+- Testar cadastro/status de chamados, comparações, exportação e limpeza.
+- Testar Chrome, Android, Windows e PWA instalada.
 
 ## Resultado
-Versão 2.2 registrada no repositório. A central é local; integração automática, backend multiempresa e homologação funcional continuam pendentes. Não usar em operação crítica sem validação e controles de segurança.
+Versão 2.3 registrada no repositório. A alteração fortalece a operação local existente, sem alegar integração ou capacidade não implementada. A homologação funcional permanece pendente; não usar como NOC de produção crítica sem validação adicional.
