@@ -1,33 +1,35 @@
-# No Network Cause 2.2
+# No Network Cause 2.3
 Copyright © Nailson Lima.
 
-## Novidades da versão 2.2
-- Central técnica local para provedores.
-- Registro de telemetria por antena/setor: utilização, usuários simultâneos, throughput, latência e perda.
-- Importação de telemetria JSON/CSV com validação.
-- Resumo de setores e alerta indicativo de utilização elevada (limiar inicial 85%).
-- Gestão local de chamados técnicos com prioridade, responsável e status.
-- Comparação de métricas antes/depois de intervenção.
-- Exportação JSON da central e limpeza dos dados locais.
-- Cache PWA atualizado para no-network-cause-v220.
+## Melhorias da versão 2.3
+- Importação JSON/CSV com validação integral antes de alterar os dados locais.
+- Falha em qualquer linha cancela a importação inteira; não deixa registros parciais.
+- Normalização de cabeçalhos: espaços, acentos e maiúsculas/minúsculas; aliases em português e inglês.
+- Verificação de aspas e cabeçalhos CSV duplicados/vazios.
+- Limite de arquivo de 5 MB e de 10.000 registros por importação.
+- Proteção para preservar os dados em memória quando o armazenamento local falha ao salvar.
+- Cache PWA atualizado para no-network-cause-v230.
 
-## Recursos anteriores
+## Recursos mantidos
 - Diagnóstico e monitoramento HTTP, histórico local, localização opcional, análise avançada e exportações.
 - Motor de recomendações para nove classes de sintomas, com hipóteses, evidências e cautelas.
+- Central local do provedor: telemetria manual/importada, resumo de setores, chamados e comparação antes/depois.
 
-## Limitações e segurança
-- A Central do Provedor armazena os dados no navegador atual; não sincroniza com Supabase.
-- Importação não é integração automática: exige exportar dados do NMS/controlador e importar arquivo.
-- SNMP, TR-069/USP, APIs de fabricantes, OSS/BSS e NMS exigem backend seguro, credenciais autorizadas e mapeamento por fabricante.
-- O limiar de 85% é indicativo e deve ser ajustado conforme tecnologia e dimensionamento.
-- Comparação antes/depois é descritiva e não prova causalidade sem metodologia de medição.
+## Limitações reais
+- A central do provedor armazena dados no navegador atual (localStorage); não sincroniza esses dados com Supabase nem com outros dispositivos.
+- A importação é por arquivo exportado; não é integração automática com NMS/controladores.
+- CSV deve usar separador vírgula e cabeçalho na primeira linha. Arquivos separados por ponto e vírgula não são suportados nesta versão.
+- O limite de 85% é indicativo, não confirma congestionamento.
+- Comparação antes/depois é descritiva e não prova causalidade.
+- O navegador não fornece acesso universal a RSSI, BSSID, gateway, ICMP ou configuração de rádio.
+- SNMP, TR-069/USP, APIs de fabricantes, OSS/BSS e NMS não foram implementados.
+- Não há multiempresa, RBAC ou auditoria centralizada.
 - Nenhuma configuração de antena, rádio ou roteador é alterada.
-- Sem multiempresa, RBAC ou auditoria centralizada nesta versão.
 
 ## Publicação
-Hospedar em HTTPS. Após publicar, atualizar a PWA para carregar o cache v220.
+Hospedar em HTTPS. O cache PWA foi atualizado para v230; após publicar, recarregue/atualize a instalação da PWA.
 
 ## QA
-Consultar QA-RELATORIO.md. Revisão estática não substitui homologação em navegadores e com dados reais.
+Consultar QA-RELATORIO.md. As verificações estáticas não substituem testes funcionais em navegadores e com arquivos reais.
 
 Contato: onsite.limavirtual@gmail.com.
