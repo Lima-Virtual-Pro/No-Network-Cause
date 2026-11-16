@@ -1,33 +1,33 @@
-# QA — No Network Cause 2.3
+# QA — No Network Cause 2.4
 Data: 16/11/2026
 
-## Escopo da versão
-- Robustez da importação JSON/CSV: validação completa antes da gravação.
-- Cancelamento integral em caso de linha inválida.
-- Normalização de cabeçalhos, suporte a aliases PT/EN, BOM UTF-8 e aspas CSV.
-- Limites de 5 MB e 10.000 registros.
-- Proteção contra perda de dados em falha de persistência local.
-- Cache PWA atualizado para v230; documentação e identificação visual 2.3.
+## Escopo
+- Inclusão do módulo environment.js e painel de leitura automática de rede.
+- Leitura condicional de navigator.connection / mozConnection / webkitConnection.
+- Eventos online/offline, mudança da API de rede e retorno da página ao primeiro plano atualizam a exibição.
+- Campos não suportados são apresentados como indisponíveis, sem inferir dados.
+- Cache PWA v240 e documentação atualizados.
 
-## Limitações conhecidas
-- Telemetria e chamados da central continuam locais no navegador.
-- Não há sincronização da central com Supabase nem compartilhamento entre usuários/dispositivos.
-- Não há integração direta com SNMP, TR-069/USP, NMS, OSS/BSS ou controladores.
-- CSV usa separador vírgula; delimitador ponto e vírgula não é suportado.
-- O limiar de 85% é indicativo; comparação antes/depois não prova causalidade.
-- Não são aplicadas configurações de rádio, antena ou roteador.
+## Identificação de antenas
+Não implementada: navegador web comum não expõe lista de torres celulares, IDs de célula, BSSID ou pontos de acesso próximos. Geolocalização não identifica antena. Requer app nativo/API autorizada/inventário compatível.
 
-## Verificações realizadas nesta entrega
-- Revisão estática das alterações e confirmação dos pontos de integração por leitura dos arquivos do repositório.
-- Não foi executado navegador real, node --check, teste em Android/Windows, teste de PWA instalada ou ensaio com exportações reais de fabricantes.
+## Limitações
+- Dados da Central continuam locais.
+- Downlink e RTT são estimativas da API do navegador, não medições independentes.
+- Não há SNMP, TR-069/USP, NMS, OSS/BSS nem comando remoto a equipamentos.
+- Compatibilidade da Network Information API varia entre navegadores.
 
-## Testes funcionais pendentes
-- Importar JSON e CSV válidos com cabeçalhos em português e inglês.
-- Confirmar cancelamento integral com registro inválido no início, meio e fim.
-- Testar BOM UTF-8, aspas CSV e cabeçalhos duplicados/vazios.
-- Simular quota cheia/erro de localStorage e confirmar preservação dos dados anteriores.
-- Testar cadastro/status de chamados, comparações, exportação e limpeza.
-- Testar Chrome, Android, Windows e PWA instalada.
+## Verificações realizadas
+- Módulo environment.js criado e referências inseridas no HTML e cache PWA.
+- Revisão estática das referências e documentação.
+- Não executados testes funcionais em Chrome/Android/Windows, nem PWA instalada.
+
+## Testes pendentes
+- Verificar painel em navegador com e sem navigator.connection.
+- Simular eventos online/offline e alteração de rede.
+- Confirmar layout responsivo em celular e desktop.
+- Confirmar atualização do cache e carregamento offline da nova versão.
+- Validar valores exibidos contra as informações disponíveis no dispositivo.
 
 ## Resultado
-Versão 2.3 registrada no repositório. A alteração fortalece a operação local existente, sem alegar integração ou capacidade não implementada. A homologação funcional permanece pendente; não usar como NOC de produção crítica sem validação adicional.
+Versão 2.4 registrada com automação limitada às informações efetivamente fornecidas pelo navegador. Não há identificação de antenas nem descoberta de redes próximas.
