@@ -1,48 +1,36 @@
-# QA — No Network Cause 1.0
+# QA — No Network Cause 2.0
 Data: 16/11/2026
 
-## Resultado executivo
-**Status: QA técnico parcial aprovado; homologação comercial/produção ainda pendente.**
-Esta entrega não será descrita como integralmente homologada: o ambiente de execução bloqueou a abertura do Chromium (`ERR_BLOCKED_BY_ADMINISTRATOR`) e o processo headless excedeu o tempo limite. Portanto, testes reais de interação no navegador não puderam ser concluídos aqui.
+## Escopo implementado
+1. Análise avançada sobre as últimas 30 verificações: taxa amostral de resposta, latência média/máxima e índice indicativo de estabilidade.
+2. Destino adicional HTTP/HTTPS configurável localmente.
+3. Alertas opcionais do navegador para interrupção e recuperação observadas durante monitoramento.
+4. Relatório de análise imprimível/salvável em PDF pelo navegador.
+5. Exportação TSV separada por tabulação como alternativa a CSV.
+6. Cache PWA atualizado para `no-network-cause-v200`.
+7. Mantida a estrutura Supabase anterior; nenhuma migração SQL é necessária nesta versão.
 
-## Testes efetivamente executados
-| Teste | Resultado | Evidência |
-|---|---|---|
-| Sintaxe JavaScript principal | APROVADO | `node --check app.js` retornou código 0 |
-| Sintaxe Service Worker | APROVADO | `node --check sw.js` retornou código 0 |
-| Manifest PWA | APROVADO | JSON parseado e campos essenciais conferidos |
-| Referências DOM diretas | APROVADO | 56 referências `$()` comparadas; nenhuma ID ausente |
-| Documentos legais e links | APROVADO | Dois arquivos HTML presentes e links na aplicação |
-| Chave no frontend | APROVADO | Chave publishable; nenhuma `service_role` encontrada |
-| Migração de histórico local | APROVADO ESTÁTICO | Mantido o nome do IndexedDB da versão anterior |
-| ZIP | APROVADO | `ZipFile.testzip()` retornou `None` |
-| Schema Supabase | APROVADO | Consulta SQL confirmou 3 tabelas `noc_*` |
-| RLS Supabase | APROVADO | RLS ativa e 4 políticas por tabela |
-| Índices de sincronização | APROVADO | Índice UNIQUE por `(user_id, client_event_id)` em diagnósticos e eventos |
-| Restrição de tipos de evento | APROVADO | Constraint inclui `diagnostic_completed`, `monitor_check` e eventos de queda/recuperação |
+## Verificações estáticas realizadas
+- Os elementos da nova navegação e seção de análise foram adicionados ao HTML.
+- Os identificadores dos controles de destino personalizado, alertas, impressão e TSV foram conectados ao JavaScript.
+- Os cálculos da análise usam apenas eventos locais do tipo diagnóstico e verificação de monitoramento.
+- O destino adicional é validado como URL HTTP/HTTPS antes de ser salvo.
+- Notificações exigem permissão explícita do navegador.
+- A folha de impressão limita a saída à seção de análise.
+- O Service Worker foi versionado para invalidar o cache anterior.
 
-## Testes não concluídos — não declarar como aprovados
-- Execução interativa real no Chrome desktop/Android.
-- Diagnóstico com queda real de Wi-Fi, Ethernet e rede móvel.
-- Download CSV/JSON em dispositivos físicos.
-- Instalação PWA e atualização do Service Worker em HTTPS publicado.
-- Cadastro, confirmação de e-mail, login, refresh de sessão e logout com conta de teste.
-- Inserção, upsert, sincronização offline/online e exclusão no Supabase por sessão autenticada.
-- Verificação de isolamento RLS com duas contas distintas.
-- Teste de GPS em dispositivo e precisão real.
-- Teste de volume, carga e longa duração do monitoramento.
+## Testes ainda necessários em ambiente real
+- Executar `node --check app.js` e `node --check sw.js` após baixar o commit.
+- Testar destino personalizado com endpoint próprio que permita requisições de navegador e com host indisponível.
+- Testar permissões de notificação e notificações em Android/Windows.
+- Imprimir/salvar PDF em Chrome Android e desktop.
+- Abrir TSV e CSV em Google Sheets Android, Excel e LibreOffice.
+- Repetir login Google, logout, renovação de sessão, sincronização e exclusão com duas contas diferentes.
+- Testar PWA instalada e atualização do Service Worker em HTTPS.
+- Testar comportamento do monitoramento com tela bloqueada; o navegador pode suspender a página.
 
-## Limites técnicos conhecidos
-A aplicação usa tentativas HTTP no navegador. Não implementa ICMP, traceroute, medição de RSSI/BSSID, inspeção de gateway, jitter, perda de pacotes real ou throughput download/upload. O navegador pode suspender tarefas em segundo plano. Falhas em serviços de teste não identificam por si só a operadora ou o equipamento causador.
+## Interpretação e limites
+O índice de estabilidade é um indicador heurístico da amostra recente, não um padrão técnico certificado. A taxa de respostas é a proporção de verificações que alcançaram pelo menos um serviço consultado, não disponibilidade contínua da conexão. Latência é tempo aproximado de tentativa HTTP, não ping ICMP. Destinos personalizados podem falhar por CORS, DNS, firewall ou indisponibilidade do serviço; uma falha não identifica sozinha a causa física.
 
-## Homologação necessária antes de vender
-1. Publicar em HTTPS no domínio definitivo.
-2. Criar conta de QA sem dados pessoais reais e testar Auth completo.
-3. Testar sincronização e exclusão em duas contas distintas.
-4. Testar Chrome Android e Windows em Wi-Fi, Ethernet e rede móvel.
-5. Validar exportações, permissões de GPS, funcionamento offline e atualização PWA.
-6. Completar dados do controlador e contato nos documentos legais e obter revisão jurídica/LGPD.
-7. Definir termos de licença, renovação, cancelamento, reembolso, suporte e política de retenção.
-
-## Conclusão
-A versão 1.0 está empacotada e passou verificações estáticas e validações do schema Supabase. Ela é adequada para **piloto controlado / homologação**, mas não deve ser anunciada como produto integralmente testado em produção até concluir a matriz acima.
+## Resultado
+**Implementação v2.0 enviada ao repositório. QA automatizado em navegador e homologação física ainda pendentes.** Não classificar o produto como integralmente homologado ou pronto para venda sem concluir os testes reais acima.
