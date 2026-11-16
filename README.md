@@ -1,7 +1,14 @@
-# No Network Cause 2.0
+# No Network Cause 2.1
 Copyright © Nailson Lima.
 
-## Novidades da versão 2.0
+## Novidades da versão 2.1
+- **Motor de soluções:** recomendações por sintoma para usuário final, empresa e provedor, com hipóteses, prioridade, evidências necessárias e cautelas operacionais.
+- **Inventário de infraestrutura:** campos opcionais para antena/setor, tecnologia, usuários simultâneos, utilização de pico, RSSI medido e backhaul.
+- **Plano exportável:** geração local de plano técnico em JSON e impressão.
+- **Segurança:** não altera equipamentos; recomendações de RF exigem telemetria, planejamento e validação técnica.
+- **Correção de sintaxe:** transição de interrupção/recuperação passou a ser assíncrona para suportar o registro de eventos.
+
+## Novidades anteriores da versão 2.0
 - **Análise avançada:** índice indicativo de estabilidade, taxa amostral de respostas, latência média/máxima e contagem de interrupções, calculados sobre até 30 verificações recentes.
 - **Destino personalizado:** permite adicionar um endpoint HTTP/HTTPS de propriedade do usuário para teste de alcance.
 - **Alertas do navegador:** notificações opcionais quando o monitoramento observa interrupção ou recuperação, mediante permissão do navegador.
