@@ -1,0 +1,8 @@
+-- No Network Cause 1.0 — referência do backend
+-- Projeto Supabase: Painel-Lima-Virtual / piagfpnjiwpngbikkkfp
+-- Tabelas existentes e verificadas: noc_monitoring_sessions, noc_diagnostics, noc_events.
+-- RLS: ativa nas três tabelas, quatro políticas por tabela, por auth.uid() = user_id.
+-- Índices de sincronização UNIQUE em (user_id, client_event_id), sem predicado parcial.
+-- Constraint de eventos aceita diagnostic_completed e monitor_check além dos eventos de queda/recuperação.
+-- Para o DDL integral, consultar Database > Migrations no projeto Supabase.
+-- Não adicionar service_role/secret key ao cliente.

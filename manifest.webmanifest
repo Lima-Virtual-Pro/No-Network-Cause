@@ -1,0 +1,11 @@
+{
+  "name": "No Network Cause 1.0 — Diagnóstico Inteligente",
+  "short_name": "No Network Cause",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#f3f6fa",
+  "theme_color": "#10243a",
+  "lang": "pt-BR",
+  "description": "Diagnóstico e monitoramento de conectividade com histórico local e sincronização opcional."
+}
