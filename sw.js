@@ -1,4 +1,4 @@
-const CACHE='no-network-cause-v101';
+const CACHE='no-network-cause-v200';
 const FILES=['./','./index.html','./app.js','./google-auth.js','./manifest.webmanifest','./icon.svg','./logo.svg','./termos-de-uso.html','./politica-de-privacidade.html'];
 self.addEventListener('install',event=>event.waitUntil(caches.open(CACHE).then(cache=>cache.addAll(FILES)).then(()=>self.skipWaiting())));
 self.addEventListener('activate',event=>event.waitUntil(caches.keys().then(keys=>Promise.all(keys.filter(key=>key!==CACHE).map(key=>caches.delete(key)))).then(()=>self.clients.claim())));
