@@ -1,4 +1,4 @@
-# QA — No Network Cause 2.5
+# QA — No Network Cause 2.6
 Data: 16/11/2026
 
 ## Escopo\n- Registro de transições online/offline informado pelo navegador.\n- Indicador amostral de confiabilidade separado por destino de teste, calculado sobre as últimas 30 verificações.
@@ -31,3 +31,13 @@ Não implementada: navegador web comum não expõe lista de torres celulares, ID
 
 ## Resultado
 Versão 2.5 registrada com automação limitada às informações efetivamente fornecidas pelo navegador. Não há identificação de antenas nem descoberta de redes próximas.
+
+
+## Versão 2.6 — coleta assistida de telemetria
+- Painel de coleta adicionado à Central do Provedor.
+- Coleta de cinco tentativas HTTP ao destino selecionado; preenche data/hora, latência média observada e taxa de falhas HTTP.
+- Setor continua sendo informado pelo operador; nenhum dado de rádio ou throughput é inventado.
+- A coleta não grava automaticamente; exige conferência e confirmação manual.
+- Service worker atualizado para cache v260.
+- Verificação estática de IDs, handlers, referências e versão de cache.
+- Testes reais em Chrome/Android/Windows e validação de throughput permanecem pendentes; não declarar teste funcional concluído.
