@@ -1,5 +1,5 @@
 {
-  "name": "No Network Cause 3.2 — Diagnóstico Inteligente",
+  "name": "No Network Cause 3.3 — Diagnóstico Inteligente",
   "short_name": "No Network Cause",
   "start_url": "./index.html",
   "scope": "./",
@@ -7,7 +7,7 @@
   "background_color": "#f3f6fa",
   "theme_color": "#071b31",
   "lang": "pt-BR",
-  "description": "Diagnóstico, histórico, análise, monitoramento híbrido automático e telemetria para dashboard técnico para conectividade.",
+  "description": "Diagnóstico, histórico, análise, monitoramento híbrido e telemetria universal óptica para conectividade.",
   "icons": [
     {
       "src": "icon.svg",
