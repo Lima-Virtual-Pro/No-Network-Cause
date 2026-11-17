@@ -164,3 +164,18 @@ Limites: índice de estabilidade é amostral, alertas dependem do navegador e p�
 - Campos, botões, cartões, tabelas e mapa com limites de largura e alturas mais equilibradas.
 - Na revisão 4.0.1, alguns títulos internos ainda mantinham o rótulo 4.0; a revisão 4.0.2 padroniza esses títulos com a versão corrente.
 - Preferências locais do monitoramento passam a usar namespace v40; os dados históricos permanecem no armazenamento existente.
+
+
+## Versão 4.0.3 — inteligência baseada em evidências
+- Novo motor local de interpretação que lê o histórico IndexedDB e a telemetria local da Central do Provedor.
+- Separa estado offline do navegador, falhas de serviços HTTP, instabilidade observada, latência HTTP e medições de rádio/óptica fornecidas por fontes externas.
+- Apresenta hipóteses classificadas por tipo de evidência, tamanho da amostra, P95, roteiro de investigação e limites explícitos.
+- Exporta resumo CSV em UTF-8 com BOM (separador ponto e vírgula), análise JSON e relatório imprimível/salvável em PDF pelo navegador.
+- Agente Python reforçado com validação de URL, limite de tamanho da resposta, timeout configurável, lista permitida de métricas e validação de faixas numéricas.
+- O layout existente foi preservado; a análise é inserida na seção Análise avançada usando os cartões e estilos atuais.
+
+### Limites e melhorias ainda dependentes de ambiente externo
+- Integração SNMP/TR-069/USP/NMS exige credenciais, API documentada e autorização do operador; não foi criada leitura fictícia para o ZTE.
+- Gestão multiempresa/multiusuário da Central do Provedor requer desenho de banco, políticas RLS, autenticação por organização, auditoria e testes de segurança. Não foi ativada nem sincronizada sem autorização e validação do esquema.
+- A classificação de causa é orientativa, não causa-raiz confirmada. A qualidade depende da quantidade e da procedência das medições.
+- PWA standalone permanece disponível. A execução do agente Python é um componente separado, instalado em computador dentro da rede e configurado com uma API real autorizada.
