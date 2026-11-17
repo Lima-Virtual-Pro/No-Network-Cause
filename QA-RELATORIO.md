@@ -68,3 +68,15 @@ Versão 2.5 registrada com automação limitada às informações efetivamente f
 - Persistência local na Central Técnica e cache PWA v310.
 - Revisão estática de código/documentação realizada durante a implementação.
 - Testes funcionais em navegador/dispositivo, validação de CORS, integração com agente real, RSSI/SNR e demais métricas de hardware permanecem pendentes. Não declarar integração física homologada.
+
+
+## Revisão estática — versão 3.1
+- [x] Coleta HTTP periódica e gravação local automática.
+- [x] Integração opcional de leitura JSON de agente autorizado.
+- [x] Separação entre falhas HTTP e perda real de pacotes.
+- [x] Campos de RSSI/SNR e métricas do rádio preenchidos apenas por fonte de telemetria.
+- [x] Metadados opcionais da API Network Information identificados como estimativas.
+- [x] Pausa de coleta quando a página está oculta.
+- [x] Cache PWA atualizado para v311.
+- [ ] Testes funcionais em Android, iOS e desktop ainda necessários.
+- [ ] Integração real com roteador/agente depende de endpoint compatível e validação no ambiente do operador.
