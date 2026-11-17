@@ -98,3 +98,21 @@ O exemplo é apenas o formato esperado, não uma medição real. Em produção, 
 - A consulta do agente é feita pelo navegador e depende de conectividade, CORS, disponibilidade e permissões do endpoint.
 - A coleta não funciona continuamente com a página fechada ou suspensa.
 - Nenhuma configuração de rádio/roteador é alterada e nenhum dado é enviado ao Supabase por esta função.
+
+
+## Versão 3.1 — Monitoramento híbrido automático
+- Coleta periódica de cinco tentativas HTTP, com gravação automática no armazenamento local.
+- Integração opcional de leitura com agente/roteador/NMS por endpoint JSON autorizado com CORS.
+- RSSI, SNR, utilização, usuários, throughput e perda real de pacotes são preenchidos somente quando fornecidos pelo agente ou por telemetria importada/manual.
+- A taxa de falhas HTTP fica em campo separado e nunca é gravada como perda real de pacotes.
+- Metadados Network Information (tipo/perfil, downlink e RTT estimados) são registrados quando disponíveis.
+- O monitoramento periódico pausa novas coletas quando a página fica oculta; mantenha a página aberta para continuar.
+- Não armazena credenciais, não envia comandos ao equipamento e não altera configurações de rede.
+- Cache PWA atualizado para no-network-cause-v311.
+
+## Limites e segurança 3.1
+- O monitoramento do navegador depende da página aberta; sistemas móveis podem suspender temporizadores em segundo plano.
+- Fetch HTTP não é ICMP ping, teste calibrado de velocidade nem medição real de perda de pacotes.
+- Valores de downlink/RTT do navegador são estimativas opcionais.
+- Integração com agente requer endpoint compatível, acessível e com CORS habilitado; não enviar tokens secretos em URL pública.
+- A Central do Provedor permanece local e não sincroniza seus registros com Supabase. Nenhuma alteração de esquema/política Supabase foi realizada.
