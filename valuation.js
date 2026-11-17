@@ -5,7 +5,7 @@ const ids=['valMrr','valRevenue','valCosts','valCustomers','valGrowth','valChurn
 const defaults={valMrr:0,valRevenue:0,valCosts:0,valCustomers:0,valGrowth:0,valChurn:0,valRevLow:1,valRevBase:2,valRevHigh:3,valProfitMult:4};
 const $=id=>document.getElementById(id);
 function getSession(){try{return JSON.parse(localStorage.getItem(SESSION)||'null')}catch{return null}}
-function isAllowed(s){const u=s?.user||{},providers=u.app_metadata?.providers||[];return !!s?.access_token&&u.id===USER&&String(u.email||'').toLowerCase()===EMAIL&&Array.isArray(providers)&&providers.includes('google')}
+function isAllowed(s){const u=s?.user||{},providers=u.app_metadata?.providers||[];return !!s?.access_token&&s.auth_method==='google'&&u.id===USER&&String(u.email||'').toLowerCase()===EMAIL&&Array.isArray(providers)&&providers.includes('google')}
 function headers(token){return {apikey:KEY,Authorization:'Bearer '+token,'Content-Type':'application/json'}}
 function values(){const v={};for(const id of ids){const n=Number($(id).value);v[id]=Number.isFinite(n)?n:0}return v}
 function apply(v){for(const id of ids)$(id).value=v?.[id]??defaults[id]}
