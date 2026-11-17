@@ -206,3 +206,11 @@ Limites: índice de estabilidade é amostral, alertas dependem do navegador e p�
 - Gestão multiempresa/multiusuário da Central do Provedor requer desenho de banco, políticas RLS, autenticação por organização, auditoria e testes de segurança. Não foi ativada nem sincronizada sem autorização e validação do esquema.
 - A classificação de causa é orientativa, não causa-raiz confirmada. A qualidade depende da quantidade e da procedência das medições.
 - PWA standalone permanece disponível. A execução do agente Python é um componente separado, instalado em computador dentro da rede e configurado com uma API real autorizada.
+
+
+## Valuation avançado — portfólio e produtos
+- Criadas as tabelas `noc_valuation_products` e `noc_valuation_snapshots`, com RLS restrita à conta Google autorizada.
+- O Valuation passou a suportar cadastro individual de produtos, fechamentos mensais, licenças ativas, novas, expiradas, canceladas e renovadas, MRR, receitas não recorrentes e custos.
+- Exibe avaliação por produto e consolidada, cenários por múltiplos de receita, projeções de 6, 12, 24 e 36 meses e tendências mensais.
+- Os fechamentos são identificados como manuais/estimados até que cada origem de licença e pagamento seja mapeada, conciliada e validada. Não somar fontes duplicadas nem tratar pedidos recebidos como receita aprovada.
+- As tabelas existentes de licenças e pedidos têm estruturas distintas por produto; a integração automática requer mapeamento explícito de cada fonte, regras de status, preço, periodicidade, estorno e renovação.
