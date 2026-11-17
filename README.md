@@ -150,3 +150,11 @@ O exemplo é apenas o formato esperado, não uma medição real. Em produção, 
 - Cache PWA atualizado para no-network-cause-v400.
 
 Limites: índice de estabilidade é amostral, alertas dependem do navegador e página ativa; não há medição física de sinal via navegador nem integração automática com equipamentos sem fonte autorizada.
+
+
+## Revisão de interface 4.0.1
+- Navegação móvel em grade de duas ou três colunas, evitando menus parcialmente escondidos.
+- Escala tipográfica e espaçamentos ajustados para telas estreitas.
+- Campos, botões, cartões, tabelas e mapa com limites de largura e alturas mais equilibradas.
+- Todos os rótulos visíveis da telemetria e monitoramento atualizados para 4.0.
+- Preferências locais do monitoramento passam a usar namespace v40; os dados históricos permanecem no armazenamento existente.
