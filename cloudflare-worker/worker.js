@@ -19,8 +19,10 @@ function normalize(payload) {
   const m=payload&&payload.metrics&&typeof payload.metrics==="object"?payload.metrics:payload;
   if(!m||typeof m!=="object"||Array.isArray(m)) throw Error("JSON deve ser um objeto.");
   const out={sector:String(m.sector||"Setor não identificado").slice(0,100),timestamp:m.timestamp||new Date().toISOString(),source:"cloudflare-agent"};
+  if(m.onu_state!==undefined&&m.onu_state!==null) out.onu_state=String(m.onu_state).slice(0,40);
+  if(m.equipment_profile!==undefined&&m.equipment_profile!==null) out.equipment_profile=String(m.equipment_profile).slice(0,80);
   if(!Number.isFinite(Date.parse(out.timestamp))) throw Error("timestamp inválido.");
-  const rules={rssi_dbm:[-120,0],snr_db:[-10,80],latency_ms:[0,600000],packet_loss_pct:[0,100],throughput_mbps:[0,1e9],utilization_pct:[0,100],users:[0,1e7]};
+  const rules={optical_rx_dbm:[-50,20],optical_tx_dbm:[-50,20],optical_voltage_mv:[0,10000],optical_bias_ma:[0,200],optical_temp_c:[-40,150],rssi_dbm:[-120,0],snr_db:[-10,80],latency_ms:[0,600000],packet_loss_pct:[0,100],throughput_mbps:[0,1e9],utilization_pct:[0,100],users:[0,1e7]};
   for(const [k,[min,max]] of Object.entries(rules)) if(m[k]!==undefined&&m[k]!==null) {
     if(typeof m[k]!=="number"||!Number.isFinite(m[k])||m[k]<min||m[k]>max) throw Error("Valor inválido: "+k);
     out[k]=m[k];
