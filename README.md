@@ -116,3 +116,13 @@ O exemplo é apenas o formato esperado, não uma medição real. Em produção, 
 - Valores de downlink/RTT do navegador são estimativas opcionais.
 - Integração com agente requer endpoint compatível, acessível e com CORS habilitado; não enviar tokens secretos em URL pública.
 - A Central do Provedor permanece local e não sincroniza seus registros com Supabase. Nenhuma alteração de esquema/política Supabase foi realizada.
+
+
+## Versão 3.2 Avançada — validação da telemetria
+- Cada ciclo executa cinco requisições de observação com timeout individual de 8 segundos e registra tentativas concluídas, duração média, estado online/offline do navegador e resultado de leitura do agente.
+- Após salvar, o aplicativo relê o armazenamento local e confirma a presença do identificador do registro antes de apresentar persistência aprovada.
+- Painel de validação apresenta último ciclo, persistência, resultado das requisições e estado do agente; autoteste local verifica armazenamento, formato dos registros, Network Information API e sintaxe da URL do agente.
+- Respostas fetch opacas não expõem status HTTP: requisição concluída não significa resposta HTTP validada nem disponibilidade integral do serviço.
+- O agente tem timeout de 8 segundos e validação básica de objeto JSON; métricas numéricas continuam sujeitas aos limites do validador de telemetria.
+- O autoteste local não substitui validação de rede, CORS, agente/roteador real nem testes em dispositivos físicos.
+- Cache PWA atualizado para no-network-cause-v320.
