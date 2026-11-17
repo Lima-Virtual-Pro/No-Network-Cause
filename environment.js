@@ -25,7 +25,7 @@ function read(){
 function init(){
  const host=document.querySelector('#dashboard .grid');if(!host||$('nocEnvironmentCard'))return;
  const card=document.createElement('article');card.className='card span-12';card.id='nocEnvironmentCard';
- const h=document.createElement('h2');h.textContent='Leitura automática do ambiente de rede · 4.0.2';
+ const h=document.createElement('h2');h.textContent='Leitura automática do ambiente de rede · 5.0';
  const p=document.createElement('p');p.className='tiny muted';p.textContent='Dados que o navegador disponibiliza sem instalar software adicional.';
  const rows=document.createElement('div');rows.id='nocEnvRows';rows.className='noc-env-list';
  const note=document.createElement('p');note.id='nocEnvNote';note.className='notice';
