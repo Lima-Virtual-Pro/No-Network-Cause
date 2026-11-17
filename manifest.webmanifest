@@ -7,7 +7,7 @@
   "background_color": "#f3f6fa",
   "theme_color": "#071b31",
   "lang": "pt-BR",
-  "description": "Diagnóstico, histórico, análise, monitoramento híbrido automático e telemetria e dashboard técnico para conectividade.",
+  "description": "Diagnóstico, histórico, análise, monitoramento híbrido automático e telemetria para dashboard técnico para conectividade.",
   "icons": [
     {
       "src": "icon.svg",
