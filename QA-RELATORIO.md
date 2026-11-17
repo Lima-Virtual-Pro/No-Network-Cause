@@ -1,12 +1,12 @@
-# QA — No Network Cause 2.4
+# QA — No Network Cause 2.5
 Data: 16/11/2026
 
-## Escopo
+## Escopo\n- Registro de transições online/offline informado pelo navegador.\n- Indicador amostral de confiabilidade separado por destino de teste, calculado sobre as últimas 30 verificações.
 - Inclusão do módulo environment.js e painel de leitura automática de rede.
 - Leitura condicional de navigator.connection / mozConnection / webkitConnection.
 - Eventos online/offline, mudança da API de rede e retorno da página ao primeiro plano atualizam a exibição.
 - Campos não suportados são apresentados como indisponíveis, sem inferir dados.
-- Cache PWA v240 e documentação atualizados.
+- Cache PWA v250 e documentação atualizados.
 
 ## Identificação de antenas
 Não implementada: navegador web comum não expõe lista de torres celulares, IDs de célula, BSSID ou pontos de acesso próximos. Geolocalização não identifica antena. Requer app nativo/API autorizada/inventário compatível.
@@ -30,4 +30,4 @@ Não implementada: navegador web comum não expõe lista de torres celulares, ID
 - Validar valores exibidos contra as informações disponíveis no dispositivo.
 
 ## Resultado
-Versão 2.4 registrada com automação limitada às informações efetivamente fornecidas pelo navegador. Não há identificação de antenas nem descoberta de redes próximas.
+Versão 2.5 registrada com automação limitada às informações efetivamente fornecidas pelo navegador. Não há identificação de antenas nem descoberta de redes próximas.
