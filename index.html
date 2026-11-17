@@ -7,7 +7,105 @@
 @media(max-width:850px){.shell{grid-template-columns:1fr}.side{padding:12px 14px;gap:10px}.brand{font-size:17px}.brand small{display:inline;margin-left:7px}.nav{display:flex;overflow:auto;gap:5px}.nav button{white-space:nowrap;padding:9px 11px;font-size:13px}.side-note{display:none}.main{padding:18px 14px 36px}.span-8,.span-6,.span-4{grid-column:span 12}.top{align-items:flex-start}.form-grid{grid-template-columns:1fr}}
 @media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important}}
 .google-btn{display:flex;align-items:center;justify-content:center;gap:10px;width:100%;background:#fff;color:#243447;border:1px solid #cbd6e2;font-weight:700}.google-btn:hover{background:#f8fafc}.google-mark{width:19px;height:19px;display:inline-grid;place-items:center;font-weight:800;color:#4285f4;font-size:19px}.brand{display:flex;align-items:center;gap:11px;font-size:19px;font-weight:850;letter-spacing:-.55px}.brand img{width:46px;height:46px;flex:0 0 46px;filter:drop-shadow(0 4px 10px #0005)}.brand small{display:block;color:#9fc8e9;font-size:10px;font-weight:650;letter-spacing:1.35px;text-transform:uppercase;margin-top:2px}.side{background:linear-gradient(155deg,#071b31 0%,#102e4c 65%,#0a2540 100%);border-right:1px solid #244765}.nav button{border:1px solid transparent;border-radius:11px;transition:background .18s,border-color .18s}.nav button.active,.nav button:hover{background:linear-gradient(100deg,#155a9b,#1a77b9);border-color:#4ba8e8;color:#fff;box-shadow:0 5px 18px #00172a55}.card{border-radius:18px;border-color:#d6e2ed;box-shadow:0 10px 30px #0b2d4c12}button{border-radius:11px;box-shadow:0 2px 4px #0b315018}button:not(.secondary):not(.danger):not(.google-btn){background:linear-gradient(135deg,#1769aa,#168bd0)}.status{background:#e5f7ef}.footer a{color:#1769aa}@media(max-width:850px){.side{padding:12px 14px 10px;gap:10px}.brand{font-size:16px}.brand img{width:38px;height:38px;flex-basis:38px}.brand small{display:block;margin-left:0;font-size:9px}.nav{padding-bottom:2px}.nav button{font-size:12px}.main{padding-top:17px}}:focus-visible{outline:3px solid #f0b429;outline-offset:2px}.status.online{background:#e5f7ef;color:#16845b}.status.offline{background:#fdebec;color:#bd3d42}.status.offline .dot{background:currentColor}
-.inline-field{display:flex;gap:8px;align-items:center}.inline-field input{min-width:0;flex:1}.inline-field button{white-space:nowrap}@media(max-width:520px){.inline-field{align-items:stretch}.inline-field button{padding:9px 11px}}@media print{body{background:#fff}.side,.top,.footer,.toast,.nav{display:none!important}.shell{display:block}.main{padding:0!important}.section{display:none!important}#insights{display:block!important}.card{box-shadow:none;break-inside:avoid;border:1px solid #bbb}.actions{display:none!important}#insights h2{color:#111}}html{overflow-x:hidden;max-width:100%}body{width:100%;overflow-x:hidden}.shell,.main,.section,.grid,.card{min-width:0;max-width:100%}.card p,.card h1,.card h2,.card h3,.card label,.metric,.muted,.footer{overflow-wrap:anywhere}.table-wrap{max-width:100%;overflow-x:auto;-webkit-overflow-scrolling:touch}.brand img{object-fit:contain;display:block}.footer{line-height:1.7;overflow-wrap:anywhere}.chart-frame{width:100%;min-width:0;overflow:hidden}.chart-frame svg{display:block;width:100%;height:auto;max-width:100%}@media(max-width:850px){.shell{display:block}.side{width:100%;min-width:0}.nav{max-width:100%;overflow-x:auto;overscroll-behavior-x:contain}.main{width:100%;padding:14px 12px 30px}.top{flex-wrap:wrap}.top h1{font-size:clamp(21px,6vw,29px)}.card{padding:14px;border-radius:15px}.grid{gap:12px}.metric{font-size:clamp(22px,7vw,29px)}.form-grid{grid-template-columns:minmax(0,1fr)}.footer{font-size:11px}}@media(max-width:390px){.main{padding-left:9px;padding-right:9px}.card{padding:12px}.nav button{font-size:11px;padding:8px 9px}.brand img{width:36px;height:36px;flex-basis:36px}}</style></head>
+.inline-field{display:flex;gap:8px;align-items:center}.inline-field input{min-width:0;flex:1}.inline-field button{white-space:nowrap}@media(max-width:520px){.inline-field{align-items:stretch}.inline-field button{padding:9px 11px}}@media print{body{background:#fff}.side,.top,.footer,.toast,.nav{display:none!important}.shell{display:block}.main{padding:0!important}.section{display:none!important}#insights{display:block!important}.card{box-shadow:none;break-inside:avoid;border:1px solid #bbb}.actions{display:none!important}#insights h2{color:#111}}html{overflow-x:hidden;max-width:100%}body{width:100%;overflow-x:hidden}.shell,.main,.section,.grid,.card{min-width:0;max-width:100%}.card p,.card h1,.card h2,.card h3,.card label,.metric,.muted,.footer{overflow-wrap:anywhere}.table-wrap{max-width:100%;overflow-x:auto;-webkit-overflow-scrolling:touch}.brand img{object-fit:contain;display:block}.footer{line-height:1.7;overflow-wrap:anywhere}.chart-frame{width:100%;min-width:0;overflow:hidden}.chart-frame svg{display:block;width:100%;height:auto;max-width:100%}@media(max-width:850px){.shell{display:block}.side{width:100%;min-width:0}.nav{max-width:100%;overflow-x:auto;overscroll-behavior-x:contain}.main{width:100%;padding:14px 12px 30px}.top{flex-wrap:wrap}.top h1{font-size:clamp(21px,6vw,29px)}.card{padding:14px;border-radius:15px}.grid{gap:12px}.metric{font-size:clamp(22px,7vw,29px)}.form-grid{grid-template-columns:minmax(0,1fr)}.footer{font-size:11px}}@media(max-width:390px){.main{padding-left:9px;padding-right:9px}.card{padding:12px}.nav button{font-size:11px;padding:8px 9px}.brand img{width:36px;height:36px;flex-basis:36px}}
+/* No Network Cause 4.0 — revisão integral de ergonomia e responsividade */
+:root{--space-1:6px;--space-2:10px;--space-3:14px;--space-4:18px}
+html{width:100%;max-width:100%;overflow-x:hidden;-webkit-text-size-adjust:100%;text-size-adjust:100%;scroll-behavior:smooth}
+body{width:100%;max-width:100%;min-width:320px;overflow-x:hidden;font-size:14px;line-height:1.48}
+.shell{width:100%;max-width:100%;min-width:0}
+.side{min-width:0}
+.brand{min-width:0;line-height:1.2}
+.brand img{width:42px;height:42px;flex:0 0 42px;object-fit:contain}
+.brand span{min-width:0}
+.nav{min-width:0}
+.nav button{min-width:0;white-space:normal;overflow-wrap:anywhere;line-height:1.25;text-align:left}
+.main{min-width:0;width:100%;max-width:100%}
+.top{min-width:0}
+.top>div{min-width:0}
+.top h1{font-size:clamp(20px,2.2vw,27px);line-height:1.2}
+.sub{font-size:14px;line-height:1.45}
+.section{min-width:0}
+.section>h2,.section-head h2{font-size:clamp(18px,2vw,22px);line-height:1.25}
+.grid{min-width:0;gap:14px}
+.card{min-width:0;padding:16px;border-radius:16px}
+.card h2,.card h3{font-size:clamp(16px,1.8vw,19px);line-height:1.3}
+.card h3{margin-top:0}
+.card p{font-size:14px;line-height:1.55;overflow-wrap:anywhere}
+.metric{font-size:clamp(21px,2.2vw,27px);line-height:1.2;overflow-wrap:anywhere}
+.eyebrow,label{font-size:12px;line-height:1.4}
+label{margin:12px 0 6px}
+input,select{min-height:44px;padding:10px 12px;font-size:15px;max-width:100%;min-width:0}
+button{min-height:42px;padding:9px 13px;font-size:14px;line-height:1.25;max-width:100%;white-space:normal}
+.actions{gap:8px}
+.table-wrap{max-width:100%;overflow-x:auto;overscroll-behavior-x:contain}
+.mapbox{height:clamp(220px,45vw,340px);padding:8px}
+.mapbox iframe{height:100%;min-height:0}
+.footer{font-size:11px;line-height:1.55}
+.chart-frame{max-width:100%;overflow:hidden}
+.chart-frame svg{max-width:100%;height:auto}
+@media(min-width:851px){
+ .shell{grid-template-columns:230px minmax(0,1fr)}
+ .side{position:sticky;top:0;height:100vh;overflow-y:auto;padding:22px 14px}
+ .nav{display:grid;gap:4px}
+ .nav button{font-size:13px;padding:9px 10px}
+ .main{padding:24px clamp(18px,2.6vw,38px) 40px}
+}
+@media(max-width:850px){
+ .shell{display:flex;flex-direction:column}
+ .side{position:relative;width:100%;height:auto;padding:10px 12px 12px;gap:10px}
+ .brand{font-size:16px;gap:9px}
+ .brand img{width:38px;height:38px;flex-basis:38px}
+ .brand small{font-size:9px;letter-spacing:1.1px}
+ /* Menus em grelha: todos os destinos visíveis, sem cortes laterais */
+ .nav{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px;width:100%;overflow:visible;padding:2px 0}
+ .nav button{display:flex;align-items:center;justify-content:center;text-align:center;min-height:38px;padding:7px 5px;font-size:11px;line-height:1.2;border-radius:9px;overflow-wrap:anywhere}
+ .side-note{display:none}
+ .main{padding:16px 13px 30px}
+ .top{margin-bottom:18px;gap:8px;align-items:center}
+ .top h1{font-size:22px}
+ .status{font-size:11px;padding:6px 9px;white-space:nowrap}
+ .grid{gap:11px}
+ .card{padding:14px;border-radius:14px}
+ .section-head{margin:17px 0 10px}
+ .span-8,.span-6,.span-4{grid-column:span 12}
+ .form-grid{grid-template-columns:minmax(0,1fr)}
+ .big-state{align-items:flex-start;gap:10px}
+ .state-icon{width:42px;height:42px;flex:0 0 42px;font-size:21px}
+ .actions{display:flex;flex-wrap:wrap}
+ .actions button{flex:0 1 auto}
+ .mapbox{height:260px}
+}
+@media(max-width:520px){
+ body{font-size:13px}
+ .nav{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .nav button{min-height:36px;font-size:11px}
+ .main{padding:13px 10px 26px}
+ .top{display:flex;flex-wrap:wrap}
+ .top h1{font-size:20px}
+ .sub{font-size:13px;margin-top:3px}
+ .status{margin-top:3px}
+ .section>h2,.section-head h2{font-size:18px}
+ .card{padding:12px;border-radius:13px}
+ .card p{font-size:13px;line-height:1.5}
+ .metric{font-size:22px}
+ label{font-size:12px}
+ input,select{min-height:42px;font-size:14px}
+ button{font-size:13px;min-height:40px;padding:9px 11px}
+ .actions button{flex:1 1 145px}
+ .mapbox{height:230px}
+ .notice{font-size:12px;padding:10px 11px}
+ .footer{font-size:10px}
+}
+@media(max-width:360px){
+ .main{padding-left:8px;padding-right:8px}
+ .nav{gap:4px}
+ .nav button{font-size:10px;padding:6px 3px}
+ .brand{font-size:15px}
+ .card{padding:10px}
+ .actions button{flex-basis:100%}
+}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+</style></head>
 <body><div class="shell"><aside class="side"><div class="brand"><img src="logo.svg" alt="" width="42" height="42"><span>No Network Cause<small>Diagnóstico inteligente</small></span></div><nav class="nav" aria-label="Navegação principal"><button class="active" data-page="dashboard">▦ Visão geral</button><button data-page="diagnostico">⌁ Diagnóstico</button><button data-page="monitoramento">◷ Monitoramento</button><button data-page="mapa">⌖ Mapa</button><button data-page="relatorios">▤ Relatórios</button><button data-page="insights">◈ Análise avançada</button><button data-page="solucoes">✦ Soluções e ISP</button><button data-page="central">▣ Central do Provedor</button><button data-page="admin">⚙ Administração</button></nav><div class="side-note">Versão 4.0 · Copyright © Nailson Lima.</div></aside>
 <main class="main"><header class="top"><div><h1 id="pageTitle">Visão geral</h1><p class="sub">Diagnóstico de conectividade, histórico e evidências.</p></div><span class="status" id="onlineBadge"><i class="dot"></i><span>Verificando...</span></span></header>
 <section id="dashboard" class="section active"><div class="grid"><article class="card span-8"><div class="big-state"><div class="state-icon">🌐</div><div><div class="eyebrow">Estado do acesso externo</div><div class="metric" id="connectionState">Aguardando diagnóstico</div><div class="muted tiny" id="connectionDetail">Execute um teste para verificar a conectividade.</div></div></div><div class="actions"><button id="quickTest">Diagnosticar agora</button><button class="secondary" data-go="monitoramento">Abrir monitoramento</button></div><div class="progress"><i id="testProgress"></i></div><p class="tiny muted" id="testMessage" aria-live="polite"></p></article><article class="card span-4"><div class="eyebrow">Interrupções registradas</div><div class="metric" id="eventCount">0</div><div class="muted tiny">Interrupções detectadas neste dispositivo</div><div class="section-head"><span class="eyebrow">Duração acumulada</span></div><div class="metric" id="downtime">—</div></article><article class="card span-4"><div class="eyebrow">Última latência HTTP</div><div class="metric" id="latency">—</div><div class="muted tiny">Tempo de resposta do teste externo</div></article><article class="card span-4"><div class="eyebrow">Tipo de rede informado</div><div class="metric" id="networkType">Não identificado</div><div class="muted tiny">O navegador pode não expor esta informação.</div></article><article class="card span-4"><div class="eyebrow">Último evento</div><div class="metric" id="lastEvent" style="font-size:17px">Nenhum</div><div class="muted tiny" id="lastEventDate">Sem registros</div></article><article class="card span-12"><h2>Confiabilidade por destino de teste</h2><div id="serviceReliability" class="muted tiny">Aguardando verificações.</div></article><article class="card span-12"><div class="section-head"><h2>Atividade recente</h2><button class="secondary" data-go="relatorios">Ver histórico</button></div><div id="recentEvents" class="muted">Ainda não há diagnósticos registrados.</div></article><article class="card span-12"><div class="notice">Limite técnico: um teste HTTP mede acesso ao serviço de teste, não a qualidade física do sinal Wi-Fi ou a cobertura da operadora. O navegador também pode suspender o monitoramento em segundo plano.</div></article></div></section>
@@ -43,7 +141,7 @@
 <article class="card span-12"><h3>Indicadores de capacidade</h3><div class="grid"><div class="card span-4"><div class="eyebrow">Registros de telemetria</div><div class="metric" id="opsTelemetryCount">0</div></div><div class="card span-4"><div class="eyebrow">Setores com uso alto</div><div class="metric" id="opsHotSectors">0</div></div><div class="card span-4"><div class="eyebrow">Chamados abertos</div><div class="metric" id="opsOpenTickets">0</div></div></div><p class="tiny muted">Limiar indicativo de utilização alta: 85%. Não representa congestionamento confirmado.</p></article>
 <article class="card span-12"><h3>Dashboard técnico sincronizado — RSSI, SNR e latência</h3><p class="tiny muted">Os três gráficos compartilham o mesmo filtro de setor e a mesma janela dos 30 registros mais recentes. Cada série plota somente medições existentes; não interpola nem inventa valores. RSSI/SNR dependem de telemetria manual ou importada. Latência é o valor registrado e pode incluir observações HTTP do navegador.</p><div class="form-grid"><div><label for="opsSignalSector">Filtrar antena / setor</label><select id="opsSignalSector"><option value="all">Todos os setores</option></select></div><div><div class="eyebrow">Último RSSI disponível</div><div class="metric" id="opsSignalLatest">—</div><div class="tiny muted" id="opsSignalLatestMeta">Sem medições RSSI.</div></div><div><div class="eyebrow">Último SNR disponível</div><div class="metric" id="opsSnrLatest">—</div><div class="tiny muted" id="opsSnrLatestMeta">Sem medições SNR.</div></div><div><div class="eyebrow">Última latência disponível</div><div class="metric" id="opsLatencyLatest">—</div><div class="tiny muted" id="opsLatencyLatestMeta">Sem latências registradas.</div></div></div><h4>RSSI — nível de sinal</h4><div id="opsSignalChart" role="img" aria-label="Gráfico histórico RSSI em dBm" style="width:100%;min-height:210px;overflow:hidden"><p class="muted">Sem leituras RSSI.</p></div><h4>SNR — relação sinal/ruído</h4><div id="opsSnrChart" role="img" aria-label="Gráfico histórico SNR em dB" style="width:100%;min-height:210px;overflow:hidden"><p class="muted">Sem leituras SNR.</p></div><h4>Latência registrada</h4><div id="opsLatencyChart" role="img" aria-label="Gráfico histórico de latência em milissegundos" style="width:100%;min-height:210px;overflow:hidden"><p class="muted">Sem latências.</p></div><p class="tiny muted">Referência indicativa: valores RSSI próximos de −50 dBm tendem a representar sinal mais forte que valores próximos de −90 dBm. A interpretação de SNR depende da tecnologia e do equipamento. Nenhum gráfico identifica antena ou confirma qualidade de serviço por si só.</p></article>
 <article class="card span-12"><h3>Coleta automática assistida</h3><p class="tiny muted">Executa tentativas HTTP a partir deste navegador e preenche somente os campos que puder medir. Não identifica antena, setor, usuários conectados ou utilização do rádio.</p><div class="form-grid"><div><label for="opsAutoTarget">Destino de teste</label><select id="opsAutoTarget"><option value="cloudflare">Cloudflare</option><option value="google">Google</option></select></div><div><label for="opsAutoSector">Antena / setor (cadastro manual)</label><input id="opsAutoSector" maxlength="100" placeholder="Selecione ou informe o setor acima"></div></div><div class="actions"><button id="opsAutoCollect" type="button">Coletar dados disponíveis</button><button id="opsAutoFillDate" class="secondary" type="button">Atualizar data/hora</button></div><div id="opsAutoStatus" class="tiny muted" aria-live="polite">Aguardando coleta. A coleta não salva automaticamente.</div><p class="notice">Latência e taxa de falhas são observações de requisições HTTP, não ping ICMP nem perda real de pacotes. Throughput só será preenchido se o teste de transferência concluir com leitura válida. Dados de antena/rádio exigem integração com equipamento ou NMS.</p></article>
-<article class="card span-12"><h3>Monitoramento híbrido automático — 3.3</h3>
+<article class="card span-12"><h3>Monitoramento híbrido automático — 4.0</h3>
 <p class="tiny muted">Com um clique, inicia a coleta imediata e depois repete no intervalo escolhido. Salva os registros automaticamente no histórico local. Se um agente compatível estiver configurado, também consulta as métricas fornecidas por ele. O monitoramento só funciona enquanto esta página estiver aberta e ativa.</p>
 <div class="form-grid">
 <div><label for="opsHybridTarget">Destino HTTP</label><select id="opsHybridTarget"><option value="cloudflare">Cloudflare</option><option value="google">Google</option></select></div>
@@ -54,7 +152,7 @@
 <div class="actions"><button id="opsHybridStart" type="button">▶ Coletar telemetria automaticamente</button><button id="opsHybridStop" class="secondary" type="button" disabled>Parar coleta</button><button id="opsHybridOnce" class="secondary" type="button">Coleta única</button></div>
 <div id="opsHybridStatus" class="tiny muted" aria-live="polite">Monitoramento parado. Configure o agente apenas se possuir um endpoint autorizado com CORS habilitado.</div>
 <div class="card" style="margin-top:14px;background:#f8fbfe">
- <h4 style="margin:0 0 10px">Validação avançada da telemetria 3.3</h4>
+ <h4 style="margin:0 0 10px">Validação avançada da telemetria 4.0</h4>
  <div class="form-grid">
   <div><div class="eyebrow">Último ciclo</div><div class="metric" id="opsQaLastRun" style="font-size:17px">Ainda não executado</div></div>
   <div><div class="eyebrow">Persistência local</div><div class="metric" id="opsQaStorage" style="font-size:17px">Não verificada</div></div>
@@ -65,7 +163,7 @@
  <div id="opsQaReport" class="tiny muted" aria-live="polite">O autoteste verifica armazenamento, estrutura dos registros e configuração local. Não substitui teste com roteador/agente real.</div>
 </div>
 <p class="notice">Contrato do agente: responder a GET com JSON contendo opcionalmente sector, timestamp, rssi_dbm, snr_db, latency_ms, packet_loss_pct, throughput_mbps, utilization_pct e users (ou esses campos dentro de metrics). Campos ausentes permanecem vazios. O endpoint deve permitir CORS para este site. Não informe tokens secretos em páginas públicas.</p>
-</article><article class="card span-12"><h3>Adaptador universal — telemetria óptica 3.3</h3>
+</article><article class="card span-12"><h3>Adaptador universal — telemetria óptica 4.0</h3>
 <p class="tiny muted">Perfil inicial para ZTE ZXHN F6645P (firmware V2.0.12P1N10). Este formulário registra leituras vistas na interface do equipamento. A coleta automática só ocorre quando um agente autorizado fornece os campos ópticos pelo endpoint JSON; o navegador não lê diretamente o painel do roteador.</p>
 <div class="form-grid">
 <div><label for="opsEquipmentProfile">Perfil do equipamento</label><select id="opsEquipmentProfile"><option value="generic">Genérico / outro fabricante</option><option value="zte-f6645p" selected>ZTE ZXHN F6645P — Claro</option></select></div>
