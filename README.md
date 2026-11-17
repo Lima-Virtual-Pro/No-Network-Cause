@@ -1,4 +1,4 @@
-# No Network Cause 2.6
+# No Network Cause 3.2
 Copyright © Nailson Lima.
 
 ## Melhorias da versão 2.5
