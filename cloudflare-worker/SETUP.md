@@ -1,4 +1,4 @@
-# Ponte de telemetria Cloudflare — No Network Cause 3.2
+# Ponte de telemetria Cloudflare — No Network Cause 3.3
 
 ## Arquitetura
 Equipamento/roteador/NMS → agente local Python → Cloudflare Worker /ingest → Cloudflare KV → aplicativo /metrics.
@@ -53,3 +53,16 @@ Somente valores efetivamente retornados pela API de origem são encaminhados. Ca
 - Proteja o secret e restrinja a API do roteador. Use HTTPS quando disponível.
 - A rota de leitura expõe a última telemetria por setor; use somente em redes/dados que possam ser expostos à origem autorizada.
 - Sem API de métricas disponível no roteador/NMS, RSSI/SNR e indicadores de rádio não podem ser coletados automaticamente.
+
+
+## Campos ópticos — versão 3.3
+O Worker aceita opcionalmente, quando fornecidos por uma fonte local autorizada:
+- optical_rx_dbm: potência óptica recebida em dBm (-50 a 20).
+- optical_tx_dbm: potência óptica transmitida em dBm (-50 a 20).
+- optical_voltage_mv: tensão do módulo em mV (0 a 10000).
+- optical_bias_ma: corrente de polarização em mA (0 a 200).
+- optical_temp_c: temperatura do módulo em °C (-40 a 150).
+- onu_state: estado ONU em texto (até 40 caracteres).
+- equipment_profile: identificador do perfil (até 80 caracteres).
+
+O agente Python encaminha os campos recebidos da SOURCE_URL sem inventar valores. Para o ZTE ZXHN F6645P, ainda é necessário identificar uma API/rota de leitura autorizada do firmware. As telas administrativas observadas não comprovam a existência de uma API, SNMP ou TR-069 acessível. Não use scraping autenticado improvisado, não desative proteções e não exponha a interface de administração à WAN.
