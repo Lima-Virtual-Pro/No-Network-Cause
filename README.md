@@ -1,3 +1,23 @@
+# No Network Cause 5.0
+Copyright © Nailson Lima.
+
+## Painel Valuation privado
+- Nova área Valuation, exibida após autenticação Google da conta autorizada onsite.limavirtual@gmail.com.
+- Premissas e dados editáveis salvos na tabela `noc_valuation_profiles`, protegida por RLS e vinculada ao usuário autorizado.
+- Cenários indicativos conservador, base e otimista por múltiplos de receita recorrente anual; EBITDA simplificado aparece como referência complementar.
+- Os resultados dependem dos dados e múltiplos informados. Não constituem laudo, oferta de investimento ou garantia de valor.
+- O banco restringe SELECT/INSERT/UPDATE ao UUID e e-mail autorizados e à conta que possui identidade Google vinculada. O marcador de sessão Google também é verificado pela interface; não equivale, isoladamente, à prova criptográfica do método de autenticação usado na sessão atual.
+
+## Atualização 5.0
+- Menu e módulo Valuation adicionados sem redesenhar o layout existente.
+- Cache PWA atualizado para v405 e manifesto identificado como 5.0.
+- Pacote de release valida a sintaxe de `valuation.js`.
+
+## Limitações e validação
+- A tela Valuation é uma ferramenta gerencial preliminar; não calcula valor patrimonial ajustado nem substitui avaliação profissional.
+- Antes de uso externo, revisar dados financeiros, premissas setoriais, dívida, caixa, impostos, concentração, contratos, propriedade intelectual e riscos.
+- A publicação do GitHub Pages e o fluxo OAuth devem ser testados no navegador real após o deploy. A revisão estática não comprova o fluxo de login nem o comportamento visual em dispositivos.
+
 # No Network Cause 4.0.2
 Copyright © Nailson Lima.
 
