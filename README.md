@@ -1,4 +1,4 @@
-# No Network Cause 4.0
+# No Network Cause 4.0.2
 Copyright © Nailson Lima.
 
 ## Revisão visual e versão 4.0.2
@@ -157,7 +157,7 @@ O exemplo é apenas o formato esperado, não uma medição real. Em produção, 
 Limites: índice de estabilidade é amostral, alertas dependem do navegador e página ativa; não há medição física de sinal via navegador nem integração automática com equipamentos sem fonte autorizada.
 
 
-## Revisão de interface 4.0.1
+## Revisão anterior de interface 4.0.1
 - Navegação móvel em grade de duas ou três colunas, evitando menus parcialmente escondidos.
 - Escala tipográfica e espaçamentos ajustados para telas estreitas.
 - Campos, botões, cartões, tabelas e mapa com limites de largura e alturas mais equilibradas.
