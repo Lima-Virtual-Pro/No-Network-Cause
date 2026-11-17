@@ -1,4 +1,4 @@
-# No Network Cause 2.5
+# No Network Cause 2.6
 Copyright © Nailson Lima.
 
 ## Melhorias da versão 2.5\n- Registro automático de transições online/offline informadas pelo navegador, separado das falhas de serviços externos.\n- Indicador amostral de confiabilidade por destino de teste, com quantidade de respostas, taxa de sucesso e horário da última tentativa.\n- Histórico diferencia eventos do estado do dispositivo e resultados de testes HTTP.
@@ -36,3 +36,18 @@ Hospedar em HTTPS. Cache PWA atualizado para v250; após publicar, recarregue/at
 Consultar QA-RELATORIO.md. Revisão estática não substitui testes funcionais em navegadores e dispositivos reais.
 
 Contato: onsite.limavirtual@gmail.com.
+
+
+## Melhorias da versão 2.6
+- Coleta assistida na Central do Provedor: cinco tentativas HTTP ao destino escolhido, preenchimento da data/hora e do campo de latência média observada.
+- Campo de perda passa a receber a taxa de falhas das tentativas HTTP desta coleta; não deve ser interpretado como perda ICMP ou perda real de pacotes.
+- Identificação do setor permanece manual/cadastrada. Utilização, usuários simultâneos e throughput não são inventados nem preenchidos por estimativa.
+- A coleta não salva automaticamente: o operador confere os valores e confirma em Registrar medição.
+- Cache PWA atualizado para no-network-cause-v260.
+
+## Limitações da coleta automática 2.6
+- Requisições HTTP dependem de conectividade, DNS, políticas do navegador, CORS e disponibilidade do destino.
+- Latência HTTP é tempo de tentativa até a resposta, não ping ICMP.
+- Taxa de falhas HTTP é apenas indicador de tentativas sem resposta.
+- Throughput real, utilização de rádio, usuários simultâneos, RSSI/SNR e identificação de antena exigem testes dedicados ou integração autorizada com equipamento/NMS.
+- Não houve alteração de Supabase nem integração com equipamentos nesta versão.
