@@ -126,3 +126,15 @@ O exemplo é apenas o formato esperado, não uma medição real. Em produção, 
 - O agente tem timeout de 8 segundos e validação básica de objeto JSON; métricas numéricas continuam sujeitas aos limites do validador de telemetria.
 - O autoteste local não substitui validação de rede, CORS, agente/roteador real nem testes em dispositivos físicos.
 - Cache PWA atualizado para no-network-cause-v320.
+
+
+## Versão 3.3 — adaptador universal e telemetria óptica
+- Incluído perfil inicial ZTE ZXHN F6645P / firmware V2.0.12P1N10, selecionável na Central do Provedor.
+- Novo registro local de estado ONU, potência óptica RX/TX (dBm), tensão (mV), corrente de polarização (mA) e temperatura (°C).
+- O agente e a ponte Cloudflare aceitam os campos ópticos: optical_rx_dbm, optical_tx_dbm, optical_voltage_mv, optical_bias_ma, optical_temp_c e onu_state; equipment_profile é metadado opcional.
+- Importação JSON/CSV reconhece aliases em português e inglês para as métricas ópticas.
+- O formulário manual registra valores observados no painel do equipamento; não representa coleta automática do roteador.
+- Coleta automática óptica depende de uma API local/agent autorizado que realmente exponha esses campos. Nenhuma rota do firmware ZTE foi presumida ou inventada.
+- Não habilitar DDNS, UPnP, DMZ, encaminhamento de portas ou acesso WAN para viabilizar a integração. Preferir agente dentro da LAN e envio de saída autenticado à ponte.
+- Central do Provedor continua em localStorage e não sincroniza essas métricas com Supabase.
+- Cache PWA atualizado para no-network-cause-v330.
