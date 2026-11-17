@@ -127,3 +127,20 @@ Versão 2.5 registrada com automação limitada às informações efetivamente f
 - [x] Mapa e formulários com limites responsivos.
 - [x] Rótulos de monitoramento/telemetria atualizados para 4.0.
 - [ ] Conferir em navegador real, PWA instalada e zoom/acessibilidade do Android.
+
+
+## QA — versão 4.0.3 (revisão estática e consistência)
+- [x] Novo módulo evidence-engine.js adicionado e referenciado no index.html.
+- [x] Motor lê eventos do IndexedDB e telemetria da Central local, sem gerar valores artificiais.
+- [x] Diferencia observações HTTP de estado online/offline do navegador e telemetria externa.
+- [x] Hipóteses exibem nível/tipo de evidência, tamanho da amostra e próximos passos.
+- [x] Exportação JSON, CSV UTF-8 com BOM/separador ; e impressão para PDF.
+- [x] Agente Python valida esquema/faixas, URL HTTP/HTTPS, tamanho de resposta e timeouts.
+- [x] Cache PWA atualizado para no-network-cause-v403 e inclui evidence-engine.js.
+- [x] Manifesto atualizado para 4.0.3.
+- [ ] Testes funcionais em Android/Chrome/Windows, modo PWA instalado, impressão PDF e exportação CSV em Excel ainda pendentes.
+- [ ] Testes de CORS/Worker/KV e integração com fonte real de equipamento/NMS ainda pendentes.
+- [ ] SNMP/TR-069/USP e painel multiempresa/multiusuário não foram implementados por dependerem de infraestrutura, esquema e credenciais que não estão disponíveis.
+- [ ] Não declarar causa-raiz, perda real de pacotes ou qualidade RF confirmadas apenas com requisições HTTP.
+
+Resultado: versão 4.0.3 com melhorias locais de interpretação, instruções técnicas e integridade de ingestão. Revisão estática não substitui homologação em campo.
