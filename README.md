@@ -214,3 +214,12 @@ Limites: índice de estabilidade é amostral, alertas dependem do navegador e p�
 - Exibe avaliação por produto e consolidada, cenários por múltiplos de receita, projeções de 6, 12, 24 e 36 meses e tendências mensais.
 - Os fechamentos são identificados como manuais/estimados até que cada origem de licença e pagamento seja mapeada, conciliada e validada. Não somar fontes duplicadas nem tratar pedidos recebidos como receita aprovada.
 - As tabelas existentes de licenças e pedidos têm estruturas distintas por produto; a integração automática requer mapeamento explícito de cada fonte, regras de status, preço, periodicidade, estorno e renovação.
+
+
+## Integração com o Observatório Inteligente de Conectividade
+- Eventos técnicos do IndexedDB são enviados em segundo plano à tabela `public.connectivity_observatory_events` quando há sessão Supabase autenticada.
+- Eventos são sincronizados como resumos sanitizados: tipo, resultado, latência HTTP observada e perfil de rede. Coordenadas, operador, e-mail e payload bruto não são enviados.
+- A sincronização tenta novamente eventos locais recentes ao iniciar o aplicativo e a cada cinco minutos; a restrição de unicidade evita duplicações.
+- Sem autenticação ou sem rede, os eventos permanecem no IndexedDB e serão tentados novamente quando houver sessão/conexão.
+- A partir da tela principal, há um link para o Observatório hospedado no ILS.
+- A integração não transforma latência HTTP em ping ICMP, nem confirma falha da operadora ou causa-raiz.
