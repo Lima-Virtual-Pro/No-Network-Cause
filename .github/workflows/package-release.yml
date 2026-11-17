@@ -27,7 +27,7 @@ jobs:
       - name: Build complete ZIP
         run: |
           mkdir -p dist package
-          rsync -a --exclude='.git' --exclude='.github' --exclude='dist' --exclude='__pycache__' --exclude='*.pyc' ./ package/
+          rsync -a --exclude='.git' --exclude='.github' --exclude='dist' --exclude='__pycache__' --exclude='*.pyc' --exclude='*.zip' ./ package/
           cd package
           zip -r ../dist/No-Network-Cause-4.0.3-completo.zip .
       - uses: actions/upload-artifact@v4
