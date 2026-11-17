@@ -2,6 +2,7 @@
 Copyright © Nailson Lima.
 
 ## Revisão visual e versão 4.0.2
+- Corrigida divergência de identificação: os cartões de monitoramento híbrido, validação avançada e telemetria óptica também exibem 4.0.2; não permanecem rótulos ativos em 4.0.
 - Corrigida a apresentação da leitura automática do ambiente de rede em telas estreitas: rótulos e valores agora usam duas colunas legíveis, sem quebra de uma letra por linha.
 - Cabeçalho, rodapé, manifesto PWA e cache identificam a versão 4.0.2.
 - A aplicação já oferece instalação como PWA em modo standalone; recursos locais funcionam conforme os arquivos armazenados em cache. Login e sincronização Supabase exigem conexão.
@@ -161,5 +162,5 @@ Limites: índice de estabilidade é amostral, alertas dependem do navegador e p�
 - Navegação móvel em grade de duas ou três colunas, evitando menus parcialmente escondidos.
 - Escala tipográfica e espaçamentos ajustados para telas estreitas.
 - Campos, botões, cartões, tabelas e mapa com limites de largura e alturas mais equilibradas.
-- Todos os rótulos visíveis da telemetria e monitoramento atualizados para 4.0.
+- Na revisão 4.0.1, alguns títulos internos ainda mantinham o rótulo 4.0; a revisão 4.0.2 padroniza esses títulos com a versão corrente.
 - Preferências locais do monitoramento passam a usar namespace v40; os dados históricos permanecem no armazenamento existente.
