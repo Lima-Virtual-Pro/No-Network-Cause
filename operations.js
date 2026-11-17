@@ -4,21 +4,38 @@ let data=(()=>{try{const x=JSON.parse(localStorage.getItem(KEY)||'null');return 
 const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const num=(v,min=0,max=Number.MAX_SAFE_INTEGER)=>{if(v===''||v==null)return null;const n=Number(v);return Number.isFinite(n)&&n>=min&&n<=max?n:NaN};
 function save(){try{localStorage.setItem(KEY,JSON.stringify(data));return true}catch{alert('Sem espaço para salvar. Exporte os dados e libere espaço no navegador.');return false}}
+function renderMetricChart(hostId,rows,key,label,unit,min,max){
+ const host=$(hostId);if(!host)return;
+ const values=rows.filter(r=>Number.isFinite(r[key]));
+ if(!values.length){host.innerHTML='<p class="muted">Sem leituras de '+label+' para este filtro. Registre manualmente ou importe telemetria.</p>';return}
+ const W=760,H=210,L=58,R=18,T=16,B=38,x=i=>L+(values.length===1?(W-L-R)/2:i*(W-L-R)/(values.length-1)),y=v=>T+(max-v)/(max-min)*(H-T-B);
+ const ticks=5,grid=Array.from({length:ticks+1},(_,i)=>min+(max-min)*i/ticks);
+ const lines=grid.map(v=>'<line x1="'+L+'" y1="'+y(v)+'" x2="'+(W-R)+'" y2="'+y(v)+'" stroke="#dce4ed"/><text x="'+(L-9)+'" y="'+(y(v)+4)+'" text-anchor="end" font-size="11" fill="#65758a">'+Number(v.toFixed(1))+'</text>').join('');
+ const pts=values.map((r,i)=>x(i).toFixed(1)+','+y(r[key]).toFixed(1)).join(' ');
+ const dots=values.map((r,i)=>'<circle cx="'+x(i)+'" cy="'+y(r[key])+'" r="4" fill="#1769aa"><title>'+esc(r.sector)+' · '+r[key]+' '+unit+' · '+new Date(r.timestamp).toLocaleString('pt-BR')+'</title></circle>').join('');
+ host.innerHTML='<svg viewBox="0 0 '+W+' '+H+'" role="img" aria-label="Histórico de '+label+'" style="width:100%;height:auto;font-family:system-ui,sans-serif">'+lines+'<polyline points="'+pts+'" fill="none" stroke="#1769aa" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/>'+dots+'<text x="'+L+'" y="'+(H-9)+'" font-size="11" fill="#65758a">Mais antigo</text><text x="'+(W-R)+'" y="'+(H-9)+'" text-anchor="end" font-size="11" fill="#65758a">Mais recente</text><text x="12" y="13" font-size="11" fill="#65758a">'+unit+'</text></svg><p class="tiny muted">'+values.length+' leituras com '+label+' · até 30 registros mais recentes disponíveis.</p>';
+}
 function renderSignalChart(){
- const sel=$('opsSignalSector'),host=$('opsSignalChart');if(!sel||!host)return;
- const sectors=[...new Set(data.telemetry.filter(x=>x.rssi_dbm!=null).map(x=>x.sector))].sort();
+ const sel=$('opsSignalSector');if(!sel)return;
+ const sectors=[...new Set(data.telemetry.map(x=>x.sector))].sort();
  const previous=sel.value;sel.innerHTML='<option value="all">Todos os setores</option>'+sectors.map(x=>'<option value="'+esc(x)+'">'+esc(x)+'</option>').join('');
  sel.value=sectors.includes(previous)?previous:'all';
- const rows=data.telemetry.filter(x=>x.rssi_dbm!=null&&(sel.value==='all'||x.sector===sel.value)).slice().sort((a,b)=>Date.parse(a.timestamp)-Date.parse(b.timestamp)).slice(-30);
- if(!rows.length){$('opsSignalLatest').textContent='—';$('opsSignalLatestMeta').textContent='Sem medições RSSI.';host.innerHTML='<p class="muted">Ainda não há leituras RSSI para este filtro. Informe RSSI no formulário ou importe telemetria com a coluna rssi_dbm.</p>';return}
- const last=rows[rows.length-1];$('opsSignalLatest').textContent=last.rssi_dbm+' dBm';$('opsSignalLatestMeta').textContent=esc(last.sector)+' · '+new Date(last.timestamp).toLocaleString('pt-BR');
- const W=760,H=240,L=58,R=18,T=16,B=42,min=-120,max=0,x=i=>L+(rows.length===1?(W-L-R)/2:i*(W-L-R)/(rows.length-1)),y=v=>T+(max-v)/(max-min)*(H-T-B);
- const points=rows.map((v,i)=>x(i).toFixed(1)+','+y(v.rssi_dbm).toFixed(1)).join(' ');
- const grid=[-120,-100,-80,-60,-40,-20,0].map(v=>'<line x1="'+L+'" y1="'+y(v)+'" x2="'+(W-R)+'" y2="'+y(v)+'" stroke="#dce4ed"/><text x="'+(L-9)+'" y="'+(y(v)+4)+'" text-anchor="end" font-size="11" fill="#65758a">'+v+'</text>').join('');
- const circles=rows.map((v,i)=>'<circle cx="'+x(i)+'" cy="'+y(v.rssi_dbm)+'" r="4" fill="#1769aa"><title>'+esc(v.sector)+' · '+v.rssi_dbm+' dBm · '+new Date(v.timestamp).toLocaleString('pt-BR')+'</title></circle>').join('');
- host.innerHTML='<svg viewBox="0 0 '+W+' '+H+'" role="img" aria-label="Histórico de RSSI em dBm" style="width:100%;height:auto;font-family:system-ui,sans-serif">'+grid+'<polyline points="'+points+'" fill="none" stroke="#1769aa" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/>'+circles+'<text x="'+L+'" y="'+(H-10)+'" font-size="11" fill="#65758a">Mais antigo</text><text x="'+(W-R)+'" y="'+(H-10)+'" text-anchor="end" font-size="11" fill="#65758a">Mais recente</text><text x="15" y="13" font-size="11" fill="#65758a">dBm</text></svg><p class="tiny muted">'+rows.length+' leituras exibidas · até 30 registros mais recentes com RSSI.</p>';
+ const rows=data.telemetry.filter(x=>sel.value==='all'||x.sector===sel.value).slice().sort((a,b)=>Date.parse(a.timestamp)-Date.parse(b.timestamp)).slice(-30);
+ const latest=rows.slice().reverse().find(x=>x.rssi_dbm!=null);
+ $('opsSignalLatest').textContent=latest?latest.rssi_dbm+' dBm':'—';
+ $('opsSignalLatestMeta').textContent=latest?esc(latest.sector)+' · '+new Date(latest.timestamp).toLocaleString('pt-BR'):'Sem medições RSSI.';
+ const snr=rows.slice().reverse().find(x=>x.snr_db!=null),lat=rows.slice().reverse().find(x=>x.latency_ms!=null);
+ $('opsSnrLatest').textContent=snr?snr.snr_db+' dB':'—';
+ $('opsSnrLatestMeta').textContent=snr?esc(snr.sector)+' · '+new Date(snr.timestamp).toLocaleString('pt-BR'):'Sem medições SNR.';
+ $('opsLatencyLatest').textContent=lat?lat.latency_ms+' ms':'—';
+ $('opsLatencyLatestMeta').textContent=lat?esc(lat.sector)+' · '+new Date(lat.timestamp).toLocaleString('pt-BR'):'Sem latências registradas.';
+ renderMetricChart('opsSignalChart',rows,'rssi_dbm','RSSI','dBm',-120,0);
+ renderMetricChart('opsSnrChart',rows,'snr_db','SNR','dB',-10,80);
+ const latencyRows=rows.filter(x=>x.latency_ms!=null);
+ const latencyMax=latencyRows.length?Math.max(100,Math.ceil(Math.max(...latencyRows.map(x=>x.latency_ms))/50)*50):1000;
+ renderMetricChart('opsLatencyChart',rows,'latency_ms','latência','ms',0,latencyMax);
 }
-\nfunction render(){
+function render(){
 $('opsTelemetryCount').textContent=data.telemetry.length;
 $('opsHotSectors').textContent=new Set(data.telemetry.filter(x=>x.utilization_pct!=null&&x.utilization_pct>=85).map(x=>x.sector)).size;
 $('opsOpenTickets').textContent=data.tickets.filter(x=>x.status!=='Concluído').length;renderSignalChart();
@@ -47,6 +64,6 @@ async function autoCollectTelemetry(){
  status.textContent='Coleta concluída: '+good.length+'/5 tentativas HTTP responderam'+(lat!==null?' · latência média observada '+lat+' ms':' · latência indisponível')+'. '+(conn?.effectiveType?'Perfil informado pelo navegador: '+conn.effectiveType+'. ':'')+'Utilização, usuários simultâneos e throughput não foram inferidos. Confira os campos e clique em Registrar medição.';
  }finally{btn.disabled=false}
 }
-function init(){if(!$('opsAddTelemetry'))return;$('opsTime').value=new Date(Date.now()-new Date().getTimezoneOffset()*60000).toISOString().slice(0,16);$('opsAddTelemetry').onclick=manual;$('opsSignalSector').onchange=renderSignalChart;$('opsAutoCollect').onclick=()=>autoCollectTelemetry().catch(e=>{$('opsAutoStatus').textContent='Falha na coleta: '+e.message;$('opsAutoCollect').disabled=false});$('opsAutoFillDate').onclick=()=>{$('opsTime').value=new Date(Date.now()-new Date().getTimezoneOffset()*60000).toISOString().slice(0,16)};$('opsAutoCollect').onclick=()=>autoCollectTelemetry().catch(e=>{$('opsAutoStatus').textContent='Falha na coleta: '+e.message;$('opsAutoCollect').disabled=false});$('opsAutoFillDate').onclick=()=>{$('opsTime').value=new Date(Date.now()-new Date().getTimezoneOffset()*60000).toISOString().slice(0,16)};$('opsImport').onclick=importData;$('opsCreateTicket').onclick=ticket;$('opsCompare').onclick=compare;$('opsExport').onclick=exportData;$('opsClear').onclick=()=>{if(confirm('Apagar todos os dados locais da central?')){const previous=data;data=empty();if(save()){render();$('opsComparison').textContent='Aguardando indicadores.'}else data=previous}};$('opsTicketList').addEventListener('change',e=>{const idx=data.tickets.findIndex(x=>x.id===e.target.dataset.ticket);if(idx>=0){const previous=data,tickets=data.tickets.slice();tickets[idx]={...tickets[idx],status:e.target.value};data={...data,tickets};if(save())render();else data=previous}});render()}
+function init(){if(!$('opsAddTelemetry'))return;$('opsTime').value=new Date(Date.now()-new Date().getTimezoneOffset()*60000).toISOString().slice(0,16);$('opsAddTelemetry').onclick=manual;$('opsSignalSector').onchange=renderSignalChart;$('opsAutoCollect').onclick=()=>autoCollectTelemetry().catch(e=>{$('opsAutoStatus').textContent='Falha na coleta: '+e.message;$('opsAutoCollect').disabled=false});$('opsAutoFillDate').onclick=()=>{$('opsTime').value=new Date(Date.now()-new Date().getTimezoneOffset()*60000).toISOString().slice(0,16)};$('opsImport').onclick=importData;$('opsCreateTicket').onclick=ticket;$('opsCompare').onclick=compare;$('opsExport').onclick=exportData;$('opsClear').onclick=()=>{if(confirm('Apagar todos os dados locais da central?')){const previous=data;data=empty();if(save()){render();$('opsComparison').textContent='Aguardando indicadores.'}else data=previous}};$('opsTicketList').addEventListener('change',e=>{const idx=data.tickets.findIndex(x=>x.id===e.target.dataset.ticket);if(idx>=0){const previous=data,tickets=data.tickets.slice();tickets[idx]={...tickets[idx],status:e.target.value};data={...data,tickets};if(save())render();else data=previous}});render()}
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init);else init();
 })();
