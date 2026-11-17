@@ -1,12 +1,12 @@
-# No Network Cause 2.4
+# No Network Cause 2.5
 Copyright © Nailson Lima.
 
-## Melhorias da versão 2.4
+## Melhorias da versão 2.5\n- Registro automático de transições online/offline informadas pelo navegador, separado das falhas de serviços externos.\n- Indicador amostral de confiabilidade por destino de teste, com quantidade de respostas, taxa de sucesso e horário da última tentativa.\n- Histórico diferencia eventos do estado do dispositivo e resultados de testes HTTP.
 - Painel automático de informações de rede disponibilizadas pelo navegador.
 - Atualização da leitura quando o dispositivo muda entre online/offline, quando a API de rede notifica alteração e quando a página volta ao primeiro plano.
 - Exibição de tipo/perfil de conexão, downlink estimado, RTT estimado, economia de dados e plataforma, somente quando suportados.
 - Atualização manual da leitura disponível.
-- Cache PWA atualizado para no-network-cause-v240.
+- Cache PWA atualizado para no-network-cause-v250.
 
 ## Identificação de antenas: limite técnico
 - Navegadores comuns não oferecem API para listar antenas celulares, torres, células, BSSID ou redes Wi-Fi próximas.
@@ -30,7 +30,7 @@ Copyright © Nailson Lima.
 - Nenhuma configuração de rádio, antena ou roteador é alterada.
 
 ## Publicação
-Hospedar em HTTPS. Cache PWA atualizado para v240; após publicar, recarregue/atualize a instalação da PWA.
+Hospedar em HTTPS. Cache PWA atualizado para v250; após publicar, recarregue/atualize a instalação da PWA.
 
 ## QA
 Consultar QA-RELATORIO.md. Revisão estática não substitui testes funcionais em navegadores e dispositivos reais.
