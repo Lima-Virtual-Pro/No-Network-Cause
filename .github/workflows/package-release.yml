@@ -1,0 +1,35 @@
+name: Package No Network Cause
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  package:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Validate JavaScript syntax
+        run: |
+          node --check app.js
+          node --check environment.js
+          node --check recommendations.js
+          node --check operations.js
+          node --check evidence-engine.js
+          node --check google-auth.js
+          node --check cloudflare-worker/worker.js
+      - name: Validate Python agent
+        run: python -m py_compile agent/noc_agent.py
+      - name: Validate manifest JSON
+        run: python -m json.tool manifest.webmanifest > /dev/null
+      - name: Build complete ZIP
+        run: |
+          mkdir -p dist
+          zip -r dist/No-Network-Cause-4.0.3-completo.zip . \
+            -x ".git/*" ".github/*" "dist/*" "__pycache__/*" "*.pyc"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: No-Network-Cause-4.0.3-completo
+          path: dist/No-Network-Cause-4.0.3-completo.zip
+          retention-days: 30
