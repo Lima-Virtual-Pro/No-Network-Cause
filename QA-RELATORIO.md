@@ -58,3 +58,13 @@ Versão 2.5 registrada com automação limitada às informações efetivamente f
 - Verificação estática de IDs dos gráficos e indicadores, chamada dos três renderizadores, filtro compartilhado e remoção dos handlers duplicados.
 - Verificação sintática JavaScript pendente de execução em ambiente de navegador; testes funcionais em Chrome/Android/Windows, PWA offline, OAuth Google e sincronização Supabase permanecem pendentes.
 - Não declarar versão homologada em campo nem testes de hardware realizados.
+
+
+## QA — versão 3.1 (revisão estática)
+- Inclusão de controles de início, parada, coleta sob demanda e intervalo configurável.
+- Configuração local do endpoint opcional do agente e setor/origem.
+- Coleta de observações HTTP do navegador e ingestão dos campos de telemetria fornecidos pelo agente.
+- Validação de URL HTTP/HTTPS e status HTTP do agente; campos não fornecidos permanecem nulos.
+- Persistência local na Central Técnica e cache PWA v310.
+- Revisão estática de código/documentação realizada durante a implementação.
+- Testes funcionais em navegador/dispositivo, validação de CORS, integração com agente real, RSSI/SNR e demais métricas de hardware permanecem pendentes. Não declarar integração física homologada.
