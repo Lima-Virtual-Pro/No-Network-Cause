@@ -15,7 +15,11 @@ function read(){
  ];
  const note=c?'Informações fornecidas pelo navegador. Downlink e RTT são estimativas da API, não medições de velocidade nem ping.':'Este navegador não oferece a API de informações de rede. O estado online/offline continua disponível.';
  const body=$('nocEnvRows'),hint=$('nocEnvNote');
- if(body)body.innerHTML=rows.map(([k,v])=>'<div class="logline"><b>'+esc(k)+'</b><div class="tiny muted">'+esc(v)+'</div></div>').join('');
+ if(body){
+  const online=navigator.onLine;
+  const dot='<span role="img" aria-label="'+(online?'Conectado segundo o navegador':'Desconectado segundo o navegador')+'" title="'+(online?'Conectado segundo o navegador':'Desconectado segundo o navegador')+'" style="display:inline-block;width:10px;height:10px;min-width:10px;border-radius:50%;background:'+(online?'#16845b':'#bd3d42')+';margin-right:7px;vertical-align:middle;box-shadow:0 0 0 3px '+(online?'#16845b22':'#bd3d4222')+'"></span>';
+  body.innerHTML=rows.map(([k,v])=>'<div class="logline"><b>'+esc(k)+'</b><div class="tiny muted">'+((k==='Tipo de rede'||k==='Perfil de conexão')?dot:'')+esc(v)+'</div></div>').join('');
+ }
  if(hint)hint.textContent=note;
 }
 function init(){
