@@ -1,7 +1,12 @@
 # No Network Cause 4.0
 Copyright © Nailson Lima.
 
-## Melhorias da versão 2.5
+## Revisão visual e versão 4.0.2
+- Corrigida a apresentação da leitura automática do ambiente de rede em telas estreitas: rótulos e valores agora usam duas colunas legíveis, sem quebra de uma letra por linha.
+- Cabeçalho, rodapé, manifesto PWA e cache identificam a versão 4.0.2.
+- A aplicação já oferece instalação como PWA em modo standalone; recursos locais funcionam conforme os arquivos armazenados em cache. Login e sincronização Supabase exigem conexão.
+
+## Histórico de funcionalidades
 - Registro automático de transições online/offline informadas pelo navegador, separado das falhas de serviços externos.
 - Indicador amostral de confiabilidade por destino de teste, com quantidade de respostas, taxa de sucesso e horário da última tentativa.
 - Histórico diferencia eventos do estado do dispositivo e resultados de testes HTTP.
