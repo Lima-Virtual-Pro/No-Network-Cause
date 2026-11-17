@@ -3,7 +3,7 @@ const EMAIL='onsite.limavirtual@gmail.com',USER='bcea361c-3ad5-474c-adcc-07226f6
 const URL='https://piagfpnjiwpngbikkkfp.supabase.co',KEY='sb_publishable_G7GV4Yox1KkbjZtjnYxFAQ_kzo9V05a',SESSION='noc-auth-session';
 const $=id=>document.getElementById(id);
 const defaults={valRevLow:1,valRevBase:2,valRevHigh:3,valProfitMult:4,valGrowth:0,valChurn:0};
-let products=[],snapshots=[],liveMetrics=null;
+let products=[],snapshots=[],liveMetrics=null,transactions=[],syncResult=null;
 function session(){try{return JSON.parse(localStorage.getItem(SESSION)||'null')}catch{return null}}
 function allowed(s){const u=s?.user||{},p=u.app_metadata?.providers||[];return !!s?.access_token&&s.auth_method==='google'&&u.id===USER&&String(u.email||'').toLowerCase()===EMAIL&&Array.isArray(p)&&p.includes('google')}
 function headers(s,extra={}){return {apikey:KEY,Authorization:'Bearer '+s.access_token,'Content-Type':'application/json',...extra}}
@@ -14,25 +14,30 @@ function assumptions(){return Object.fromEntries(Object.keys(defaults).map(k=>[k
 async function api(path,s,opts={}){const {headers:extra={},...rest}=opts;const r=await fetch(URL+'/rest/v1/'+path,{...rest,headers:headers(s,extra)});if(!r.ok)throw new Error('HTTP '+r.status+' '+(await r.text()).slice(0,240));return r.status===204?null:r.json()}
 async function load(){const s=session(),ok=allowed(s);$('valuationNav')?.classList.toggle('hidden',!ok);if(!ok){$('valuationAccess').textContent='Acesso negado. Esta área exige login Google com onsite.limavirtual@gmail.com.';return}
 $('valuationAccess').textContent='Acesso autorizado para '+EMAIL+'.';try{
- const [p,ss,prof,live]=await Promise.all([
+ syncResult=await api('rpc/noc_valuation_sync_financials',s,{method:'POST',body:'{}'});
+ const [p,ss,prof,live,tx]=await Promise.all([
  api('noc_valuation_products?select=*&order=product_name.asc',s),
  api('noc_valuation_snapshots?select=*&order=period_month.asc',s),
  api('noc_valuation_profiles?select=inputs&user_id=eq.'+USER,s),
- api('rpc/noc_valuation_live_metrics',s,{method:'POST',body:'{}'})
+ api('rpc/noc_valuation_live_metrics',s,{method:'POST',body:'{}'}),
+ api('noc_valuation_transactions?select=*&order=paid_at.asc',s)
  ]);
- products=p||[];snapshots=ss||[];liveMetrics=live||null;
+ products=p||[];snapshots=ss||[];liveMetrics=live||null;transactions=tx||[];
  const saved=prof?.[0]?.inputs||{};Object.entries(defaults).forEach(([k,v])=>$(k).value=saved[k]??v);
  const existing=new Set(products.map(x=>x.product_key));
  const autoProducts=(liveMetrics?.products||[]).filter(x=>!existing.has(x.product_key));
  for(const x of autoProducts){await api('noc_valuation_products?on_conflict=user_id,product_key',s,{method:'POST',headers:{Prefer:'resolution=merge-duplicates,return=minimal'},body:JSON.stringify({user_id:USER,product_key:x.product_key,product_name:x.product_name,category:'software',billing_model:'mixed',price_amount:0,include_in_portfolio:true,status:'active',notes:'Importado automaticamente do cadastro de licenças; receita/preço ainda não conciliado.'})});}
  if(autoProducts.length){products=await api('noc_valuation_products?select=*&order=product_name.asc',s);}
  render();
- $('valuationSaveStatus').textContent='Sincronização automática concluída em '+new Date(liveMetrics.generated_at).toLocaleString('pt-BR')+'. Licenças são lidas das fontes conectadas; receita e preço permanecem pendentes quando não conciliados.';
+ $('valuationSaveStatus').textContent='Sincronização automática concluída em '+new Date(liveMetrics.generated_at).toLocaleString('pt-BR')+'. Conciliação: '+(syncResult?.upserted||0)+' registros atualizados.';
+
  }catch(e){$('valuationSaveStatus').textContent='Falha ao carregar dados: '+e.message}}
 function currentSnap(key){return snapshots.filter(x=>x.product_key===key).sort((a,b)=>b.period_month.localeCompare(a.period_month))[0]||null}
 function evaluate(mrr,costs,ass){const arr=mrr*12,ebitda=arr-costs*12;return {arr,ebitda,low:arr*ass.valRevLow,base:arr*ass.valRevBase,high:arr*ass.valRevHigh}}
 function project(mrr,months,growth,churn){const monthlyGrowth=Math.pow(Math.max(0,1+growth/100),1/12)-1;return mrr*Math.pow(Math.max(0,1+monthlyGrowth-churn/100),months)}
-function render(){const a=assumptions(),included=products.filter(p=>p.include_in_portfolio&&p.status==='active'),rows=included.map(p=>({p,s:currentSnap(p.product_key)}));
+function render(){const paid=transactions.filter(t=>t.status==='paid'),refunded=transactions.filter(t=>['refunded','chargeback'].includes(t.status)),gross=transactions.reduce((n,t)=>n+Number(t.gross_amount||0),0),net=paid.reduce((n,t)=>n+Number(t.net_amount||0),0),reversed=refunded.reduce((n,t)=>n+Number(t.gross_amount||0),0),pending=transactions.filter(t=>['pending','unknown'].includes(t.status)).length;
+ const txBox=$('valFinancialReconciliation');if(txBox)txBox.innerHTML='<b>Conciliação financeira automática</b><br>Registros sincronizados: '+transactions.length+' · Pagamentos confirmados: '+paid.length+' · Estornos/chargebacks: '+refunded.length+' · Pendentes ou não classificados: '+pending+'<br>Volume bruto registrado: '+money(gross)+' · Receita líquida confirmada: '+money(net)+' · Valor estornado: '+money(reversed)+'<br><small>Atualizado: '+(syncResult?.synced_at?new Date(syncResult.synced_at).toLocaleString('pt-BR'):'—')+'. Somente status pagos entram na receita líquida; registros revogados não são tratados como vendas.</small>';
+ const a=assumptions(),included=products.filter(p=>p.include_in_portfolio&&p.status==='active'),rows=included.map(p=>({p,s:currentSnap(p.product_key)}));
  const liveMap=new Map((liveMetrics?.products||[]).map(x=>[x.product_key,x]));const active=rows.reduce((n,x)=>n+Number(liveMap.get(x.p.product_key)?.active_licenses??x.s?.active_licenses??0),0),mrr=rows.reduce((n,x)=>n+Number(x.s?.mrr||0),0),cost=rows.reduce((n,x)=>n+Number(x.s?.costs||0),0),v=evaluate(mrr,cost,a);
  $('valPortfolioProducts').textContent=products.length;$('valPortfolioLicenses').textContent=active;$('valPortfolioMrr').textContent=money(mrr);$('valPortfolioValue').textContent=money(v.base);
  $('valPortfolioStatus').textContent='Licenças ativas sincronizadas das fontes conectadas; receita e custos vêm dos fechamentos mensais. Fontes: '+(liveMetrics?.products?.length||0)+' produto(s) mapeados. Dados ausentes não são tratados como zero confirmado.';
