@@ -18,6 +18,7 @@ jobs:
           node --check operations.js
           node --check evidence-engine.js
           node --check google-auth.js
+          node --check contract.js
           node --check cloudflare-worker/worker.js
       - name: Validate Python agent
         run: python -m py_compile agent/noc_agent.py
