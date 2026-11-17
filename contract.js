@@ -4,7 +4,7 @@ const URL='https://piagfpnjiwpngbikkkfp.supabase.co';
 const KEY='sb_publishable_G7GV4Yox1KkbjZtjnYxFAQ_kzo9V05a';
 const SESSION_KEY='noc-auth-session';
 const $=id=>document.getElementById(id);
-let contractHash=null,checking=false,accepted=false;
+let contractHash=null,checking=false,accepted=false,adminMode=false;
 function session(){try{return JSON.parse(localStorage.getItem(SESSION_KEY)||'null')}catch{return null}}
 function gate(open){const el=$('nocContractGate');if(!el)return;el.classList.toggle('is-open',!!open);el.setAttribute('aria-hidden',open?'false':'true');document.body.style.overflow=open?'hidden':'';}
 function msg(s){$('nocContractStatus').textContent=s}
@@ -14,7 +14,7 @@ async function refresh(){
  if(checking)return;checking=true;
  try{
   const s=session();
-  if(!s?.access_token){accepted=false;$('nocContractAccount').textContent='Entre na sua conta pela seção Administração para registrar o aceite.';$('nocContractLogin').textContent='Abrir Administração';$('nocContractAccept').disabled=true;gate(true);return}
+  if(!s?.access_token){accepted=false;if(adminMode){gate(false);return}$('nocContractAccount').textContent='Entre na sua conta pela seção Administração para registrar o aceite.';$('nocContractLogin').textContent='Abrir Administração';$('nocContractAccept').disabled=true;gate(true);return}
   if(s.expires_at&&s.expires_at<Date.now()){accepted=false;$('nocContractAccount').textContent='Sua sessão expirou. Entre novamente para continuar.';$('nocContractAccept').disabled=true;gate(true);return}
   $('nocContractAccount').textContent='Conta autenticada: '+(s.user?.email||'usuário conectado');
   const h=await hashContract();
@@ -42,12 +42,12 @@ async function accept(){
  }catch(e){msg(e.message||'Falha ao registrar aceite.');}
  finally{updateButton()}
 }
-function openAdmin(){gate(false);const b=document.querySelector('[data-page="admin"]');if(b)b.click();setTimeout(()=>gate(!accepted),250)}
+function openAdmin(){adminMode=true;gate(false);const b=document.querySelector('[data-page="admin"]');if(b)b.click();}
 function init(){
  $('nocContractAgree').addEventListener('change',updateButton);
  $('nocContractAccept').addEventListener('click',accept);
  $('nocContractLogin').addEventListener('click',openAdmin);
- window.addEventListener('noc-auth-changed',refresh);
+ window.addEventListener('noc-auth-changed',()=>{adminMode=false;refresh()});
  window.addEventListener('storage',e=>{if(e.key===SESSION_KEY)refresh()});
  refresh();
 }
