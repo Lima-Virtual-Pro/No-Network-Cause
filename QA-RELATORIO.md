@@ -1,7 +1,9 @@
 # QA — No Network Cause 2.6
 Data: 16/11/2026
 
-## Escopo\n- Registro de transições online/offline informado pelo navegador.\n- Indicador amostral de confiabilidade separado por destino de teste, calculado sobre as últimas 30 verificações.
+## Escopo
+- Registro de transições online/offline informado pelo navegador.
+- Indicador amostral de confiabilidade separado por destino de teste, calculado sobre as últimas 30 verificações.
 - Inclusão do módulo environment.js e painel de leitura automática de rede.
 - Leitura condicional de navigator.connection / mozConnection / webkitConnection.
 - Eventos online/offline, mudança da API de rede e retorno da página ao primeiro plano atualizam a exibição.
@@ -41,4 +43,18 @@ Versão 2.5 registrada com automação limitada às informações efetivamente f
 - Service worker atualizado para cache v260.
 - Verificação estática de IDs, handlers, referências e versão de cache.
 - Testes reais em Chrome/Android/Windows e validação de throughput permanecem pendentes; não declarar teste funcional concluído.
-\n\n## Versão 2.6.1 — dashboard de sinal\n- Conferir presença de painel, filtro de setor e gráfico SVG.\n- Conferir validação RSSI (-120 a 0 dBm) e SNR (-10 a 80 dB).\n- Conferir importação de aliases RSSI/SNR.\n- Teste funcional em dispositivos reais permanece pendente.\n
+
+
+## Versão 2.6.1 — dashboard de sinal
+- Conferir presença de painel, filtro de setor e gráfico SVG.
+- Conferir validação RSSI (-120 a 0 dBm) e SNR (-10 a 80 dB).
+- Conferir importação de aliases RSSI/SNR.
+- Teste funcional em dispositivos reais permanece pendente.
+
+
+## QA — versão 3.0 (revisão estática)
+- Atualização de títulos, rodapé, manifesto e cache PWA para 3.0/v300.
+- Dashboard de RSSI, SNR e latência com filtro único por setor e janela de até 30 registros.
+- Verificação estática de IDs dos gráficos e indicadores, chamada dos três renderizadores, filtro compartilhado e remoção dos handlers duplicados.
+- Verificação sintática JavaScript pendente de execução em ambiente de navegador; testes funcionais em Chrome/Android/Windows, PWA offline, OAuth Google e sincronização Supabase permanecem pendentes.
+- Não declarar versão homologada em campo nem testes de hardware realizados.
