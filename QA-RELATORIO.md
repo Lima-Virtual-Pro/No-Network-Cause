@@ -41,3 +41,4 @@ Versão 2.5 registrada com automação limitada às informações efetivamente f
 - Service worker atualizado para cache v260.
 - Verificação estática de IDs, handlers, referências e versão de cache.
 - Testes reais em Chrome/Android/Windows e validação de throughput permanecem pendentes; não declarar teste funcional concluído.
+\n\n## Versão 2.6.1 — dashboard de sinal\n- Conferir presença de painel, filtro de setor e gráfico SVG.\n- Conferir validação RSSI (-120 a 0 dBm) e SNR (-10 a 80 dB).\n- Conferir importação de aliases RSSI/SNR.\n- Teste funcional em dispositivos reais permanece pendente.\n
