@@ -51,3 +51,4 @@ Contato: onsite.limavirtual@gmail.com.
 - Taxa de falhas HTTP é apenas indicador de tentativas sem resposta.
 - Throughput real, utilização de rádio, usuários simultâneos, RSSI/SNR e identificação de antena exigem testes dedicados ou integração autorizada com equipamento/NMS.
 - Não houve alteração de Supabase nem integração com equipamentos nesta versão.
+\n\n## Versão 2.6.1 — dashboard de sinal\n- Gráfico histórico SVG de RSSI (dBm), com filtro por antena/setor e últimas 30 leituras.\n- Campo opcional RSSI e SNR no registro manual de telemetria.\n- Importação CSV/JSON aceita aliases de RSSI e SNR.\n- Sem leitura automática de sinal pelo navegador; dados dependem de registro manual ou telemetria importada.\n
