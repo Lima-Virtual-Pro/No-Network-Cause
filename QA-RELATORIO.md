@@ -80,3 +80,14 @@ Versão 2.5 registrada com automação limitada às informações efetivamente f
 - [x] Cache PWA atualizado para v311.
 - [ ] Testes funcionais em Android, iOS e desktop ainda necessários.
 - [ ] Integração real com roteador/agente depende de endpoint compatível e validação no ambiente do operador.
+
+
+## QA — versão 3.2 Avançada (revisão estática)
+- [x] Cinco sondagens com timeout individual e registro de concluídas/falhas.
+- [x] Estado online/offline do navegador incluído no registro, sem confundir com disponibilidade do serviço.
+- [x] Persistência confirmada por leitura de retorno do registro gravado.
+- [x] Timeout e validação estrutural básica da resposta JSON do agente.
+- [x] Painel de validação e autoteste local de armazenamento/estrutura/configuração.
+- [x] Distinção explícita entre requisição concluída, resposta HTTP validada e perda real de pacotes.
+- [ ] Testes funcionais em Android/desktop, cenários de desconexão, CORS e integração com agente/roteador real permanecem pendentes.
+- [ ] Não declarar telemetria física homologada sem fonte real e ensaio de campo.
