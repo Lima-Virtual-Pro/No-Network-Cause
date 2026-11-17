@@ -118,3 +118,12 @@ Versão 2.5 registrada com automação limitada às informações efetivamente f
 - [ ] Testar impressão/salvamento PDF em dispositivos reais.
 - [ ] Validar RSSI/SNR e telemetria óptica com fonte autorizada de hardware.
 - [ ] Não declarar homologação funcional ou integração física sem ensaios de campo.
+
+
+## Revisão visual 4.0.1 — baseada nas capturas Android
+- [x] Navegação em grade para reduzir corte de menus em telas móveis.
+- [x] Redução de tipografia, margens, paddings e altura dos cartões.
+- [x] Ajustes específicos para larguras abaixo de 520 px e 360 px.
+- [x] Mapa e formulários com limites responsivos.
+- [x] Rótulos de monitoramento/telemetria atualizados para 4.0.
+- [ ] Conferir em navegador real, PWA instalada e zoom/acessibilidade do Android.
