@@ -1,7 +1,10 @@
 # No Network Cause 2.6
 Copyright © Nailson Lima.
 
-## Melhorias da versão 2.5\n- Registro automático de transições online/offline informadas pelo navegador, separado das falhas de serviços externos.\n- Indicador amostral de confiabilidade por destino de teste, com quantidade de respostas, taxa de sucesso e horário da última tentativa.\n- Histórico diferencia eventos do estado do dispositivo e resultados de testes HTTP.
+## Melhorias da versão 2.5
+- Registro automático de transições online/offline informadas pelo navegador, separado das falhas de serviços externos.
+- Indicador amostral de confiabilidade por destino de teste, com quantidade de respostas, taxa de sucesso e horário da última tentativa.
+- Histórico diferencia eventos do estado do dispositivo e resultados de testes HTTP.
 - Painel automático de informações de rede disponibilizadas pelo navegador.
 - Atualização da leitura quando o dispositivo muda entre online/offline, quando a API de rede notifica alteração e quando a página volta ao primeiro plano.
 - Exibição de tipo/perfil de conexão, downlink estimado, RTT estimado, economia de dados e plataforma, somente quando suportados.
@@ -51,4 +54,26 @@ Contato: onsite.limavirtual@gmail.com.
 - Taxa de falhas HTTP é apenas indicador de tentativas sem resposta.
 - Throughput real, utilização de rádio, usuários simultâneos, RSSI/SNR e identificação de antena exigem testes dedicados ou integração autorizada com equipamento/NMS.
 - Não houve alteração de Supabase nem integração com equipamentos nesta versão.
-\n\n## Versão 2.6.1 — dashboard de sinal\n- Gráfico histórico SVG de RSSI (dBm), com filtro por antena/setor e últimas 30 leituras.\n- Campo opcional RSSI e SNR no registro manual de telemetria.\n- Importação CSV/JSON aceita aliases de RSSI e SNR.\n- Sem leitura automática de sinal pelo navegador; dados dependem de registro manual ou telemetria importada.\n
+
+
+## Versão 2.6.1 — dashboard de sinal
+- Gráfico histórico SVG de RSSI (dBm), com filtro por antena/setor e últimas 30 leituras.
+- Campo opcional RSSI e SNR no registro manual de telemetria.
+- Importação CSV/JSON aceita aliases de RSSI e SNR.
+- Sem leitura automática de sinal pelo navegador; dados dependem de registro manual ou telemetria importada.
+
+
+## Versão 3.0 — versão estável consolidada
+- Dashboard técnico com três séries históricas: RSSI, SNR e latência, usando filtro de setor compartilhado.
+- Indicadores de última leitura para RSSI, SNR e latência; gráficos limitados aos 30 registros mais recentes da janela selecionada.
+- Cada série apresenta apenas pontos efetivamente registrados, sem interpolação ou geração de dados ausentes.
+- RSSI/SNR aceitos no registro manual e importação JSON/CSV; latência pode ser registrada manualmente, importada ou observada pelo teste HTTP assistido.
+- Correção de handlers duplicados na coleta assistida e atualização de versão/cache PWA.
+- Mantidos armazenamento local da Central do Provedor, importação validada, chamados, comparação antes/depois, exportação JSON, diagnóstico, monitoramento, relatórios e sincronização opcional dos eventos gerais com Supabase.
+
+## Limites conhecidos da versão 3.0
+- A Central do Provedor continua local (localStorage) e não é sincronizada com Supabase.
+- Não há leitura de RSSI/SNR por APIs do navegador, ping ICMP, traceroute, teste de throughput, SNMP, TR-069/USP, NMS, OSS/BSS ou controle remoto de rádio/roteador.
+- A latência obtida por fetch é observação HTTP e não deve ser interpretada como ping ICMP. A taxa de falhas HTTP não equivale a perda real de pacotes.
+- A sincronização Supabase abrange os eventos/diagnósticos do módulo principal; não sincroniza telemetria, chamados ou comparações da Central do Provedor.
+- A publicação estática e a revisão de código não substituem testes funcionais em dispositivos, navegadores e contas reais.
