@@ -91,3 +91,16 @@ Versão 2.5 registrada com automação limitada às informações efetivamente f
 - [x] Distinção explícita entre requisição concluída, resposta HTTP validada e perda real de pacotes.
 - [ ] Testes funcionais em Android/desktop, cenários de desconexão, CORS e integração com agente/roteador real permanecem pendentes.
 - [ ] Não declarar telemetria física homologada sem fonte real e ensaio de campo.
+
+
+## QA — versão 3.3 (revisão estática)
+- [x] Perfil de equipamento ZTE ZXHN F6645P e firmware observado documentados na interface.
+- [x] Campos ópticos adicionados ao registro local e ao resumo da última leitura.
+- [x] Validação de limites para RX/TX, tensão, corrente e temperatura.
+- [x] Contrato Cloudflare Worker ampliado para aceitar campos ópticos e estado ONU.
+- [x] Importação JSON/CSV ampliada com aliases PT/EN.
+- [x] Cache PWA atualizado para v330.
+- [ ] Não foi executada leitura automática no ZTE; endpoint/API do firmware ainda não foi identificado.
+- [ ] Testes funcionais em navegador, agente real, CORS, Worker/KV e equipamento físico pendentes.
+- [ ] Leituras ópticas de exemplo vieram de capturas fornecidas pelo operador; não são resultados de teste do software.
+- [ ] Não declarar integração ZTE homologada nem coleta física automatizada.
