@@ -7,7 +7,20 @@ function toast(msg){const t=$('toast');t.textContent=msg;t.classList.remove('hid
 function now(){return new Date().toISOString()}function fmt(d){return d?new Date(d).toLocaleString('pt-BR'):'—'}function duration(ms){if(!Number.isFinite(ms)||ms<0)return '—';const s=Math.round(ms/1000);return s<60?s+' s':Math.floor(s/60)+' min '+s%60+' s'}
 function openDB(){return new Promise((resolve,reject)=>{const req=indexedDB.open(DB,1);req.onupgradeneeded=()=>{const d=req.result;if(!d.objectStoreNames.contains(STORE)){const s=d.createObjectStore(STORE,{keyPath:'id',autoIncrement:true});s.createIndex('timestamp','timestamp')}};req.onsuccess=()=>{db=req.result;resolve(db)};req.onerror=()=>reject(req.error)})}
 function allEvents(){return new Promise((resolve,reject)=>{const r=db.transaction(STORE).objectStore(STORE).getAll();r.onsuccess=()=>resolve(r.result.sort((a,b)=>b.timestamp.localeCompare(a.timestamp)));r.onerror=()=>reject(r.error)})}
-function addEvent(e){return new Promise((resolve,reject)=>{const r=db.transaction(STORE,'readwrite').objectStore(STORE).add(e);r.onsuccess=()=>resolve(r.result);r.onerror=()=>reject(r.error)})}
+function addEvent(e){return new Promise((resolve,reject)=>{const r=db.transaction(STORE,'readwrite').objectStore(STORE).add(e);r.onsuccess=()=>{const id=r.result;try{syncObservatoryEvent({...e,id})}catch{}resolve(id)};r.onerror=()=>reject(r.error)})}
+async function syncObservatoryEvent(event){
+ try{
+  const s=JSON.parse(localStorage.getItem(AUTH_KEY)||'null');
+  if(!s?.access_token||!s?.user?.id)return false;
+  const body={user_id:s.user.id,source_event_id:String(event.id??event.timestamp),source_system:'no-network-cause-5.0',event_type:String(event.event_type||'event').slice(0,60),result:String(event.result||'unknown').slice(0,40),latency_ms:Number.isFinite(event.latency_ms)?Math.max(0,Math.round(event.latency_ms)):null,network_type:event.network_type?String(event.network_type).slice(0,60):null,occurred_at:event.timestamp||now()};
+  const response=await fetch(SUPABASE.url+'/rest/v1/connectivity_observatory_events',{method:'POST',headers:{apikey:SUPABASE.key,Authorization:'Bearer '+s.access_token,'Content-Type':'application/json',Prefer:'return=minimal'},body:JSON.stringify(body)});
+  if(response.ok||response.status===409)return true;
+  return false;
+ }catch{return false}
+}
+async function retryObservatorySync(){
+ try{const s=JSON.parse(localStorage.getItem(AUTH_KEY)||'null');if(!s?.access_token)return;const events=(await allEvents()).slice(0,100);for(const e of events)await syncObservatoryEvent(e)}catch{}
+}
 function updateEvent(id,patch){return new Promise((resolve,reject)=>{const tx=db.transaction(STORE,'readwrite'),s=tx.objectStore(STORE),r=s.get(id);r.onsuccess=()=>{if(r.result)s.put({...r.result,...patch})};tx.oncomplete=resolve;tx.onerror=()=>reject(tx.error)})}
 function clearEvents(){return new Promise((resolve,reject)=>{const r=db.transaction(STORE,'readwrite').objectStore(STORE).clear();r.onsuccess=resolve;r.onerror=()=>reject(r.error)})}
 function prefs(){try{return JSON.parse(localStorage.getItem('noc-prefs')||'{}')}catch{return {}}}function savePrefs(p){localStorage.setItem('noc-prefs',JSON.stringify({...prefs(),...p}))}
