@@ -19,6 +19,7 @@ jobs:
           node --check evidence-engine.js
           node --check google-auth.js
           node --check contract.js
+          node --check valuation.js
           node --check cloudflare-worker/worker.js
       - name: Validate Python agent
         run: python -m py_compile agent/noc_agent.py
@@ -29,9 +30,9 @@ jobs:
           mkdir -p dist package
           rsync -a --exclude='.git' --exclude='.github' --exclude='dist' --exclude='__pycache__' --exclude='*.pyc' --exclude='*.zip' ./ package/
           cd package
-          zip -r ../dist/No-Network-Cause-4.0.3-completo.zip .
+          zip -r ../dist/No-Network-Cause-5.0-completo.zip .
       - uses: actions/upload-artifact@v4
         with:
-          name: No-Network-Cause-4.0.3-completo
+          name: No-Network-Cause-5.0-completo
           path: dist/No-Network-Cause-4.0.3-completo.zip
           retention-days: 30
