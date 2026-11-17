@@ -13,6 +13,13 @@ Copyright © Nailson Lima.
 - Cache PWA atualizado para v405 e manifesto identificado como 5.0.
 - Pacote de release valida a sintaxe de `valuation.js`.
 
+
+## Revisão de consistência 5.0
+- Rótulos ativos de monitoramento, telemetria óptica, leitura do ambiente, análise baseada em evidências e rodapé alinhados para 5.0.
+- Bloco de evolução tecnológica transferido para Administração como planejamento técnico; sua restrição real por perfil depende da implementação de papéis e autorização no servidor.
+- Corrigido o caminho do artefato ZIP no workflow de release para corresponder ao nome gerado 5.0.
+- O histórico de versões anteriores permanece no README como histórico, não como versão ativa.
+
 ## Limitações e validação
 - A tela Valuation é uma ferramenta gerencial preliminar; não calcula valor patrimonial ajustado nem substitui avaliação profissional.
 - Antes de uso externo, revisar dados financeiros, premissas setoriais, dívida, caixa, impostos, concentração, contratos, propriedade intelectual e riscos.
