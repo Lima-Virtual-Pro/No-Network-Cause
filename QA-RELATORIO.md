@@ -104,3 +104,17 @@ Versão 2.5 registrada com automação limitada às informações efetivamente f
 - [ ] Testes funcionais em navegador, agente real, CORS, Worker/KV e equipamento físico pendentes.
 - [ ] Leituras ópticas de exemplo vieram de capturas fornecidas pelo operador; não são resultados de teste do software.
 - [ ] Não declarar integração ZTE homologada nem coleta física automatizada.
+
+
+## QA — versão 4.0 (revisão estática)
+- [x] Ajustes CSS para reduzir cortes e overflow em celular.
+- [x] Alertas com contexto seguro, permissões e fallback interno.
+- [x] Estatísticas de média, mediana, P95, máximo e taxa de resposta.
+- [x] Gráfico SVG baseado somente nas latências observadas.
+- [x] Instruções de investigação contextualizadas e ressalvas técnicas.
+- [x] Cache PWA v400.
+- [ ] Testes funcionais em Android/iOS/desktop e larguras 320–768 px.
+- [ ] Validar permissões de notificações em HTTPS e modo PWA instalado.
+- [ ] Testar impressão/salvamento PDF em dispositivos reais.
+- [ ] Validar RSSI/SNR e telemetria óptica com fonte autorizada de hardware.
+- [ ] Não declarar homologação funcional ou integração física sem ensaios de campo.
