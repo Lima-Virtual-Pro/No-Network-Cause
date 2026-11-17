@@ -27,7 +27,7 @@ function init(){
  const card=document.createElement('article');card.className='card span-12';card.id='nocEnvironmentCard';
  const h=document.createElement('h2');h.textContent='Leitura automática do ambiente de rede · 4.0.2';
  const p=document.createElement('p');p.className='tiny muted';p.textContent='Dados que o navegador disponibiliza sem instalar software adicional.';
- const rows=document.createElement('div');rows.id='nocEnvRows';rows.className='grid';
+ const rows=document.createElement('div');rows.id='nocEnvRows';rows.className='noc-env-list';
  const note=document.createElement('p');note.id='nocEnvNote';note.className='notice';
  const button=document.createElement('button');button.type='button';button.className='secondary';button.textContent='Atualizar leitura';button.addEventListener('click',read);
  card.append(h,p,rows,note,button);host.append(card);read();
