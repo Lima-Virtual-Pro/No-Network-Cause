@@ -8,7 +8,7 @@
 @media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important}}
 .google-btn{display:flex;align-items:center;justify-content:center;gap:10px;width:100%;background:#fff;color:#243447;border:1px solid #cbd6e2;font-weight:700}.google-btn:hover{background:#f8fafc}.google-mark{width:19px;height:19px;display:inline-grid;place-items:center;font-weight:800;color:#4285f4;font-size:19px}.brand{display:flex;align-items:center;gap:11px;font-size:19px;font-weight:850;letter-spacing:-.55px}.brand img{width:46px;height:46px;flex:0 0 46px;filter:drop-shadow(0 4px 10px #0005)}.brand small{display:block;color:#9fc8e9;font-size:10px;font-weight:650;letter-spacing:1.35px;text-transform:uppercase;margin-top:2px}.side{background:linear-gradient(155deg,#071b31 0%,#102e4c 65%,#0a2540 100%);border-right:1px solid #244765}.nav button{border:1px solid transparent;border-radius:11px;transition:background .18s,border-color .18s}.nav button.active,.nav button:hover{background:linear-gradient(100deg,#155a9b,#1a77b9);border-color:#4ba8e8;color:#fff;box-shadow:0 5px 18px #00172a55}.card{border-radius:18px;border-color:#d6e2ed;box-shadow:0 10px 30px #0b2d4c12}button{border-radius:11px;box-shadow:0 2px 4px #0b315018}button:not(.secondary):not(.danger):not(.google-btn){background:linear-gradient(135deg,#1769aa,#168bd0)}.status{background:#e5f7ef}.footer a{color:#1769aa}@media(max-width:850px){.side{padding:12px 14px 10px;gap:10px}.brand{font-size:16px}.brand img{width:38px;height:38px;flex-basis:38px}.brand small{display:block;margin-left:0;font-size:9px}.nav{padding-bottom:2px}.nav button{font-size:12px}.main{padding-top:17px}}:focus-visible{outline:3px solid #f0b429;outline-offset:2px}.status.online{background:#e5f7ef;color:#16845b}.status.offline{background:#fdebec;color:#bd3d42}.status.offline .dot{background:currentColor}
 .inline-field{display:flex;gap:8px;align-items:center}.inline-field input{min-width:0;flex:1}.inline-field button{white-space:nowrap}@media(max-width:520px){.inline-field{align-items:stretch}.inline-field button{padding:9px 11px}}@media print{body{background:#fff}.side,.top,.footer,.toast,.nav{display:none!important}.shell{display:block}.main{padding:0!important}.section{display:none!important}#insights{display:block!important}.card{box-shadow:none;break-inside:avoid;border:1px solid #bbb}.actions{display:none!important}#insights h2{color:#111}}html{overflow-x:hidden;max-width:100%}body{width:100%;overflow-x:hidden}.shell,.main,.section,.grid,.card{min-width:0;max-width:100%}.card p,.card h1,.card h2,.card h3,.card label,.metric,.muted,.footer{overflow-wrap:anywhere}.table-wrap{max-width:100%;overflow-x:auto;-webkit-overflow-scrolling:touch}.brand img{object-fit:contain;display:block}.footer{line-height:1.7;overflow-wrap:anywhere}.chart-frame{width:100%;min-width:0;overflow:hidden}.chart-frame svg{display:block;width:100%;height:auto;max-width:100%}@media(max-width:850px){.shell{display:block}.side{width:100%;min-width:0}.nav{max-width:100%;overflow-x:auto;overscroll-behavior-x:contain}.main{width:100%;padding:14px 12px 30px}.top{flex-wrap:wrap}.top h1{font-size:clamp(21px,6vw,29px)}.card{padding:14px;border-radius:15px}.grid{gap:12px}.metric{font-size:clamp(22px,7vw,29px)}.form-grid{grid-template-columns:minmax(0,1fr)}.footer{font-size:11px}}@media(max-width:390px){.main{padding-left:9px;padding-right:9px}.card{padding:12px}.nav button{font-size:11px;padding:8px 9px}.brand img{width:36px;height:36px;flex-basis:36px}}
-/* No Network Cause 4.0.3 — revisão integral de ergonomia e responsividade */
+/* Histórico de interface: revisão de ergonomia incorporada da versão 4.0.3 */
 :root{--space-1:6px;--space-2:10px;--space-3:14px;--space-4:18px}
 html{width:100%;max-width:100%;overflow-x:hidden;-webkit-text-size-adjust:100%;text-size-adjust:100%;scroll-behavior:smooth}
 body{width:100%;max-width:100%;min-width:320px;overflow-x:hidden;font-size:14px;line-height:1.48}
@@ -106,7 +106,7 @@ button{min-height:42px;padding:9px 13px;font-size:14px;line-height:1.25;max-widt
 }
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
 
-/* 4.0.2 — retorno à navegação horizontal e redução de áreas vazias */
+/* Histórico de interface: navegação horizontal ajustada na versão 4.0.2 */
 @media(max-width:850px){
  .side{padding:10px 12px 9px;gap:8px}
  .brand{gap:9px;margin-bottom:1px}
@@ -137,7 +137,7 @@ button{min-height:42px;padding:9px 13px;font-size:14px;line-height:1.25;max-widt
  .nav button{white-space:normal;text-align:left}
 }
 
-/* 4.0.2 — tabela de ambiente legível em telas estreitas */
+/* Histórico de interface: tabela de ambiente ajustada na versão 4.0.2 */
 .noc-env-list{display:grid!important;grid-template-columns:minmax(0,1fr)!important;gap:0!important;width:100%;min-width:0;overflow:hidden;border:1px solid var(--line);border-radius:12px;background:#fff}
 .noc-env-row{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.15fr);align-items:center;gap:12px;min-width:0;padding:11px 13px;border-bottom:1px solid var(--line);border-left:0!important;margin:0!important}
 .noc-env-row:last-child{border-bottom:0}
