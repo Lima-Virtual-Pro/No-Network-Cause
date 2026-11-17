@@ -11,7 +11,7 @@ function money(n){return new Intl.NumberFormat('pt-BR',{style:'currency',currenc
 function num(id){const x=Number($(id)?.value);return Number.isFinite(x)?x:0}
 function esc(x){return String(x??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
 function assumptions(){return Object.fromEntries(Object.keys(defaults).map(k=>[k,num(k)]))}
-async function api(path,s,opts={}){const r=await fetch(URL+'/rest/v1/'+path,{headers:headers(s,opts.headers||{}),...opts});if(!r.ok)throw new Error('HTTP '+r.status+' '+(await r.text()).slice(0,240));return r.status===204?null:r.json()}
+async function api(path,s,opts={}){const {headers:extra={},...rest}=opts;const r=await fetch(URL+'/rest/v1/'+path,{...rest,headers:headers(s,extra)});if(!r.ok)throw new Error('HTTP '+r.status+' '+(await r.text()).slice(0,240));return r.status===204?null:r.json()}
 async function load(){const s=session(),ok=allowed(s);$('valuationNav')?.classList.toggle('hidden',!ok);if(!ok){$('valuationAccess').textContent='Acesso negado. Esta área exige login Google com onsite.limavirtual@gmail.com.';return}
 $('valuationAccess').textContent='Acesso autorizado para '+EMAIL+'.';try{
  const [p,ss,prof]=await Promise.all([
