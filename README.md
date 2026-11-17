@@ -1,4 +1,4 @@
-# No Network Cause 3.2
+# No Network Cause 4.0
 Copyright © Nailson Lima.
 
 ## Melhorias da versão 2.5
@@ -138,3 +138,15 @@ O exemplo é apenas o formato esperado, não uma medição real. Em produção, 
 - Não habilitar DDNS, UPnP, DMZ, encaminhamento de portas ou acesso WAN para viabilizar a integração. Preferir agente dentro da LAN e envio de saída autenticado à ponte.
 - Central do Provedor continua em localStorage e não sincroniza essas métricas com Supabase.
 - Cache PWA atualizado para no-network-cause-v330.
+
+
+## Versão 4.0
+- Layout responsivo reforçado para telas estreitas, com contenção de overflow e tabelas roláveis.
+- Alertas com verificação de HTTPS, permissão do navegador e fallback interno visível.
+- Análise com mediana, P95, média, máximo, taxa de resposta, tamanho e confiança operacional da amostra.
+- Gráfico de latência com observações reais, sem interpolar falhas.
+- Recomendações de próximos passos condicionadas às evidências e aos limites do teste HTTP.
+- RSSI/SNR continuam dependendo de medições reais manuais, importadas ou fornecidas por agente autorizado.
+- Cache PWA atualizado para no-network-cause-v400.
+
+Limites: índice de estabilidade é amostral, alertas dependem do navegador e página ativa; não há medição física de sinal via navegador nem integração automática com equipamentos sem fonte autorizada.
