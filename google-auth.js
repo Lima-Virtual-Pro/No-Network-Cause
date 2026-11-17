@@ -6,7 +6,7 @@ const $=id=>document.getElementById(id);
 function show(message){const el=$('googleAuthMessage');if(el)el.textContent=message;}
 function bridge(session){
   if(!session)return;
-  const mapped={access_token:session.access_token,refresh_token:session.refresh_token,expires_at:(session.expires_at||Math.floor(Date.now()/1000+(session.expires_in||3600)))*1000,user:session.user};
+  const mapped={auth_method:'google',access_token:session.access_token,refresh_token:session.refresh_token,expires_at:(session.expires_at||Math.floor(Date.now()/1000+(session.expires_in||3600)))*1000,user:session.user};
   let current=null;try{current=JSON.parse(localStorage.getItem(SESSION_KEY)||'null')}catch{}
   if(current?.access_token!==mapped.access_token){
     localStorage.setItem(SESSION_KEY,JSON.stringify(mapped));
