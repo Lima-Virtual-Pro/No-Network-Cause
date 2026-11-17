@@ -25,9 +25,10 @@ jobs:
         run: python -m json.tool manifest.webmanifest > /dev/null
       - name: Build complete ZIP
         run: |
-          mkdir -p dist
-          zip -r dist/No-Network-Cause-4.0.3-completo.zip . \
-            -x ".git/*" ".github/*" "dist/*" "__pycache__/*" "*.pyc"
+          mkdir -p dist package
+          rsync -a --exclude='.git' --exclude='.github' --exclude='dist' --exclude='__pycache__' --exclude='*.pyc' ./ package/
+          cd package
+          zip -r ../dist/No-Network-Cause-4.0.3-completo.zip .
       - uses: actions/upload-artifact@v4
         with:
           name: No-Network-Cause-4.0.3-completo
