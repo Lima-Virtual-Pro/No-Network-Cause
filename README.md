@@ -223,3 +223,13 @@ Limites: índice de estabilidade é amostral, alertas dependem do navegador e p�
 - Sem autenticação ou sem rede, os eventos permanecem no IndexedDB e serão tentados novamente quando houver sessão/conexão.
 - A partir da tela principal, há um link para o Observatório hospedado no ILS.
 - A integração não transforma latência HTTP em ping ICMP, nem confirma falha da operadora ou causa-raiz.
+
+
+## Versão 5.1 — Inteligência de Dados e Diagnóstico de Rede
+- Novo módulo de análise retrospectiva que cruza eventos do IndexedDB com telemetria local da Central do Provedor.
+- Identifica recorrência por hora/dia, concentração por célula geográfica aproximada e setor, e valores atípicos em latência, RSSI, SNR, perda de pacotes e utilização quando esses campos existem.
+- Permite registrar coordenadas opcionais em telemetria manual e importar latitude/longitude por CSV/JSON. Coordenadas não são exigidas; a localização de eventos continua sujeita à permissão de geolocalização.
+- Exporta diagnóstico JSON/CSV e impressão/PDF, distinguindo evidência observada, hipótese e recomendação de investigação.
+- Análise local no navegador; não envia coordenadas nem telemetria para serviços externos. O módulo não atribui causa-raiz, não identifica antenas e não altera equipamentos.
+- Dados ausentes não são inventados. Amostras pequenas e cobertura geográfica insuficiente são explicitamente sinalizadas.
+- Cache PWA atualizado para no-network-cause-v408.
