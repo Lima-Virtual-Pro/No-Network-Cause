@@ -26,7 +26,7 @@ async function syncObservatoryEvent(event){
    if(existing.ok){const rows=await existing.json();saved=rows?.[0]||null;}
   }else return false;
   const hasCoords=Number.isFinite(event.latitude)&&Number.isFinite(event.longitude)&&event.latitude>=-90&&event.latitude<=90&&event.longitude>=-180&&event.longitude<=180;
-  const eligible=['diagnostic','monitor_check','outage_start','recovery'].includes(event.event_type);
+  const eligible=['diagnostic','monitor_check','outage_start','recovery'].includes(event.event_type)&&event.result!=='location_saved';
   const consentAt=Date.parse(prefsNow.sharePreciseGeoAt||'');
   if(prefsNow.sharePreciseGeo===true&&Number.isFinite(consentAt)&&new Date(event.timestamp||0).getTime()>=consentAt&&hasCoords&&eligible&&saved?.id){
    const geo={observatory_event_id:saved.id,user_id:session.user.id,latitude:event.latitude,longitude:event.longitude,accuracy_m:Number.isFinite(event.accuracy)?Math.max(0,Math.round(event.accuracy)):null,occurred_at:event.timestamp||now()};
