@@ -21,7 +21,8 @@ function analyze(events,telemetry){
  const allTimes=[...failures.map(x=>x.timestamp),...anomalyRows.map(x=>x.timestamp)];
  const hours=group(allTimes.map(timestamp=>({timestamp})),x=>hourKey(x.timestamp));
  const hourRows=Object.entries(hours).map(([hour,a])=>({hour,count:a.length})).sort((a,b)=>b.count-a.count);
- const areas=group(failures.filter(x=>num(x.latitude)!=null&&num(x.longitude)!=null),x=>Number(x.latitude).toFixed(3)+', '+Number(x.longitude).toFixed(3));
+ const geoRows=[...failures,...anomalyRows];
+ const areas=group(geoRows.filter(x=>num(x.latitude)!=null&&num(x.longitude)!=null),x=>Number(x.latitude).toFixed(3)+', '+Number(x.longitude).toFixed(3));
  const areaRows=Object.entries(areas).map(([area,a])=>({area,count:a.length,first:a.map(x=>x.timestamp).sort()[0],last:a.map(x=>x.timestamp).sort().at(-1)})).sort((a,b)=>b.count-a.count);
  const sectors=group(anomalyRows,x=>x.sector||'Setor não informado');
  const sectorRows=Object.entries(sectors).map(([sector,a])=>({sector,count:a.length,flags:[...new Set(a.flatMap(x=>x.flags))]})).sort((a,b)=>b.count-a.count);
@@ -47,7 +48,7 @@ function analyze(events,telemetry){
  actions.push('Separar testes por segmento: dispositivo/LAN, Wi-Fi ou rádio, gateway, enlace de acesso, DNS e destinos externos.');
  actions.push('Registrar intervenção, responsável e horário; repetir a mesma bateria de testes antes/depois para medir o resultado.');
  const n=ev.length+t.length,confidence=n>=30?'Amostra mais consistente (30+ registros)':n>=10?'Amostra inicial (10–29 registros)':'Baixa confiança (menos de 10 registros)';
- return {generated_at:new Date().toISOString(),version:'5.1',sample:{events:ev.length,telemetry:t.length,failures:failures.length,telemetry_anomalies:anomalyRows.length,geo_failures:failures.filter(x=>num(x.latitude)!=null&&num(x.longitude)!=null).length,confidence,from:min?.toISOString()||null,to:max?.toISOString()||null},metrics:Object.fromEntries(Object.entries(values).map(([k,a])=>[k,{count:a.length,median:a.length?median(a):null,max:a.length?Math.max(...a):null}])),hours:hourRows,areas:areaRows,sectors:sectorRows,findings,actions,limits};
+ return {generated_at:new Date().toISOString(),version:'5.1',sample:{events:ev.length,telemetry:t.length,failures:failures.length,telemetry_anomalies:anomalyRows.length,geo_failures:geoRows.filter(x=>num(x.latitude)!=null&&num(x.longitude)!=null).length,confidence,from:min?.toISOString()||null,to:max?.toISOString()||null},metrics:Object.fromEntries(Object.entries(values).map(([k,a])=>[k,{count:a.length,median:a.length?median(a):null,max:a.length?Math.max(...a):null}])),hours:hourRows,areas:areaRows,sectors:sectorRows,findings,actions,limits};
 }
 function list(a){return '<ul>'+a.map(x=>'<li>'+esc(x)+'</li>').join('')+'</ul>'}
 function render(r){
