@@ -1,5 +1,5 @@
 {
-  "name": "No Network Cause 5.0 — Diagnóstico e Valuation",
+  "name": "No Network Cause 5.1 — Inteligência de Dados",
   "short_name": "No Network Cause",
   "start_url": "./index.html",
   "scope": "./",
@@ -7,7 +7,7 @@
   "background_color": "#f3f6fa",
   "theme_color": "#071b31",
   "lang": "pt-BR",
-  "description": "Diagnóstico baseado em evidências, monitoramento híbrido e análise técnica de conectividade.",
+  "description": "Diagnóstico baseado em evidências, monitoramento híbrido e inteligência analítica de conectividade.",
   "icons": [
     {
       "src": "icon.svg",
