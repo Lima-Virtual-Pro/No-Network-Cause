@@ -27,7 +27,8 @@ async function syncObservatoryEvent(event){
   }else return false;
   const hasCoords=Number.isFinite(event.latitude)&&Number.isFinite(event.longitude)&&event.latitude>=-90&&event.latitude<=90&&event.longitude>=-180&&event.longitude<=180;
   const eligible=['diagnostic','monitor_check','outage_start','recovery'].includes(event.event_type);
-  const consentAt=Date.parse(prefsNow.sharePreciseGeoAt||'');\n  if(prefsNow.sharePreciseGeo===true&&Number.isFinite(consentAt)&&new Date(event.timestamp||0).getTime()>=consentAt&&hasCoords&&eligible&&saved?.id){
+  const consentAt=Date.parse(prefsNow.sharePreciseGeoAt||'');
+  if(prefsNow.sharePreciseGeo===true&&Number.isFinite(consentAt)&&new Date(event.timestamp||0).getTime()>=consentAt&&hasCoords&&eligible&&saved?.id){
    const geo={observatory_event_id:saved.id,user_id:session.user.id,latitude:event.latitude,longitude:event.longitude,accuracy_m:Number.isFinite(event.accuracy)?Math.max(0,Math.round(event.accuracy)):null,occurred_at:event.timestamp||now()};
    const geoResponse=await fetch(SUPABASE.url+'/rest/v1/connectivity_observatory_geo_private?on_conflict=observatory_event_id',{method:'POST',headers:{...headers,Prefer:'resolution=ignore-duplicates,return=minimal'},body:JSON.stringify(geo)});
    if(!geoResponse.ok)return false;
